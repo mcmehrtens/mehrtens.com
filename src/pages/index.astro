@@ -1,27 +1,15 @@
 ---
-import Nav from "../components/Nav.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>mehrtens.com</title>
-  </head>
-  <body>
-    <Nav />
-    <h1>Matthew Mehrtens</h1>
-    <main>
-      <p>
-        Hi, I'm Matthew. I'm a Ph.D. student at Iowa State University and a
-        technology enthusiast. My research is in developing computational models
-        for solid propellants (the kind that go in rockets). When I'm not
-        learning to be a rocket scientist, I spend my time programming, learning
-        about technology, and taking care of my cats.
-      </p>
-    </main>
-  </body>
-</html>
+<BaseLayout title="Home">
+  <main>
+    <p>
+      Hi, I'm Matthew. I'm a Ph.D. student at Iowa State University and a
+      technology enthusiast. My research is in developing computational models
+      for solid propellants (the kind that go in rockets). When I'm not learning
+      to be a rocket scientist, I spend my time programming, learning about
+      technology, and taking care of my cats.
+    </p>
+  </main>
+</BaseLayout>

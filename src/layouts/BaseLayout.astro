@@ -1,0 +1,21 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+
+const { title = "Matthew Mehrtens" } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="pt-20">
+      <slot />
+    </main>
+  </body>
+</html>
