@@ -5,5 +5,33 @@
       "command": "./node_modules/.bin/prettier",
       "arguments": ["--stdin-filepath", "{buffer_path}"]
     }
+  },
+  "code_actions_on_format": {
+    "source.fixAll.eslint": true
+  },
+
+  // vtsls is the single TS server (Zed defaults to two); ESLint does the linting; Harper (prose) stays off.
+  "language_servers": ["!typescript-language-server", "!harper-ls", "..."],
+  "languages": {
+    "Astro": { "language_servers": ["eslint", "!harper-ls", "..."] },
+    "JSON": { "language_servers": ["eslint", "json-language-server"] },
+    "JSONC": { "language_servers": ["eslint", "json-language-server"] },
+    "CSS": { "language_servers": ["eslint", "vscode-css-language-server"] },
+    "Markdown": { "language_servers": ["eslint"] }
+  },
+
+  // Built-in servers stay for completion/hover; validation off where ESLint/CI owns diagnostics.
+  "lsp": {
+    "json-language-server": {
+      "settings": { "json": { "validate": { "enable": false } } }
+    },
+    "vscode-css-language-server": {
+      "settings": {
+        "css": { "validate": false },
+        "scss": { "validate": false },
+        "less": { "validate": false }
+      }
+    },
+    "yaml-language-server": { "settings": { "yaml": { "validate": false } } }
   }
 }
