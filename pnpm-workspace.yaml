@@ -3,3 +3,9 @@ allowBuilds:
   sharp: true
 minimumReleaseAgeExclude:
   - prettier@3.9.1
+# Force patched versions of vulnerable transitive deps (pulled in by astro /
+# @astrojs/check). The selector syntax only rewrites the vulnerable range, so
+# already-safe copies (e.g. yaml@2.9.0) are left untouched.
+overrides:
+  js-yaml@<4.2.0: ^4.2.0 # GHSA-h67p-54hq-rp68 (quadratic-complexity DoS)
+  "yaml@>=2.0.0 <2.8.3": ^2.8.3 # GHSA-48c2-rrv3-qjmp (stack overflow via nested collections)
