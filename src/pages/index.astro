@@ -7,10 +7,8 @@ const year = parseInt(
     year: "numeric",
   }),
 );
-const copyright =
-  year > publishYear
-    ? `© ${publishYear}-${year} Matthew Mehrtens`
-    : `© ${publishYear} Matthew Mehrtens`;
+const copyrightYears =
+  year > publishYear ? `${publishYear}-${year}` : `${publishYear}`;
 ---
 
 <html lang="en-US">
@@ -99,7 +97,16 @@ const copyright =
     </main>
 
     <footer>
-      <p><small>{copyright}</small></p>
+      <p>
+        <small>
+          <a href="https://mehrtens.com">mehrtens.com</a> © {copyrightYears} by{
+            " "
+          }
+          <a href="https://mehrtens.com">Matthew Mehrtens</a> under <a
+            href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a
+          >
+        </small>
+      </p>
       <nav aria-label="footer">
         <ul>
           <li>
