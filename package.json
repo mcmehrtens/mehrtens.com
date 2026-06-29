@@ -14,6 +14,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "sign:security": "sh scripts/sign-security-txt.sh",
+    "check:security": "sh scripts/check-security-txt.sh",
     "check": "astro check",
     "verify": "pnpm run lint && pnpm run format:check && pnpm run check && pnpm run build",
     "prepare": "husky"
