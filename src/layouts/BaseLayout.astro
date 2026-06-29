@@ -1,0 +1,79 @@
+---
+import Nav from "../components/Nav.astro";
+import { copyrightYears } from "../utils/copyright";
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const canonicalURL = new URL(pathname, Astro.site).href;
+
+const years = copyrightYears(2026);
+---
+
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="author" content="Matthew Mehrtens" />
+    <meta name="description" content={description} />
+  </head>
+
+  <body>
+    <a href="#main">Skip to main</a>
+
+    <header>
+      <a href="/">Matthew Mehrtens</a>
+      <Nav
+        ariaLabel="primary"
+        navLinks={[
+          { href: "/", label: "About Me" },
+          { href: "/blog", label: "Blog" },
+          { href: "/projects", label: "Projects" },
+          { href: "/contact", label: "Contact" },
+        ]}
+      />
+    </header>
+
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer>
+      <p>
+        <small>
+          <a href="https://mehrtens.com">mehrtens.com</a> © {years} by <a
+            href="https://mehrtens.com">Matthew Mehrtens</a
+          > under <a href="https://creativecommons.org/licenses/by/4.0/"
+            >CC BY 4.0</a
+          >
+        </small>
+      </p>
+      <Nav
+        ariaLabel="site information"
+        navLinks={[
+          {
+            href: "https://github.com/mcmehrtens/mehrtens.com",
+            label: "Source",
+          },
+          {
+            href: "https://github.com/mcmehrtens/mehrtens.com/blob/main/LICENSE",
+            rel: "license",
+            label: "License",
+          },
+          { href: "/privacy", rel: "privacy-policy", label: "Privacy" },
+          { href: "/terms", rel: "terms-of-service", label: "Terms" },
+          { href: "/hall-of-fame", label: "Security" },
+        ]}
+      />
+    </footer>
+  </body>
+</html>
