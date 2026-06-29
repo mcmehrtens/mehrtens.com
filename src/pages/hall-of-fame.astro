@@ -1,0 +1,128 @@
+---
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const publishYear = 2026;
+const year = parseInt(
+  new Date().toLocaleDateString("en-US", {
+    timeZone: "America/Chicago",
+    year: "numeric",
+  }),
+);
+const copyright =
+  year > publishYear
+    ? `© ${publishYear}-${year} Matthew Mehrtens`
+    : `© ${publishYear} Matthew Mehrtens`;
+
+interface Acknowledgment {
+  date: string;
+  researcher: string;
+  finding: string;
+}
+
+const acknowledgments: Acknowledgment[] = [
+  // {
+  //   date: "2026-06-28",
+  //   researcher: "Jane Doe",
+  //   finding: "Reflected cross-site scripting",
+  // },
+];
+
+const ordered = [...acknowledgments].sort((a, b) =>
+  b.date.localeCompare(a.date),
+);
+---
+
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Hall of Fame - Matthew Mehrtens</title>
+    <meta name="author" content="Matthew Mehrtens" />
+    <meta
+      name="description"
+      content="Security researchers who have responsibly disclosed vulnerabilities affecting mehrtens.com."
+    />
+  </head>
+
+  <body>
+    <a href="#main">Skip to main</a>
+
+    <header>
+      <a href="/">Matthew Mehrtens</a>
+      <nav aria-label="primary">
+        <ul>
+          <li><a href="/">About Me</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <h1>Security Hall of Fame</h1>
+      <p>
+        I'm grateful to the security researchers below, who responsibly
+        disclosed vulnerabilities and helped keep this site safe. If you've
+        found a security issue, please see the <a
+          href="https://github.com/mcmehrtens/mehrtens.com/blob/main/SECURITY.md"
+          >security policy</a
+        > for how to report it.
+      </p>
+
+      {
+        ordered.length === 0 ? (
+          <p>
+            No vulnerabilities have been reported yet. If you find one, you
+            could be the first listed here. See the{" "}
+            <a href="https://github.com/mcmehrtens/mehrtens.com/blob/main/SECURITY.md">
+              security policy
+            </a>{" "}
+            to report it responsibly.
+          </p>
+        ) : (
+          <table>
+            <caption>
+              Researchers who have responsibly disclosed security issues, most
+              recent first.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Researcher</th>
+                <th scope="col">Finding</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ordered.map((a) => (
+                <tr>
+                  <td>
+                    <time datetime={a.date}>{a.date}</time>
+                  </td>
+                  <td>{a.researcher}</td>
+                  <td>{a.finding}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
+      }
+    </main>
+
+    <footer>
+      <p><small>{copyright}</small></p>
+      <nav aria-label="legal">
+        <ul>
+          <li>
+            <a href="https://github.com/mcmehrtens/mehrtens.com">Source</a>
+          </li>
+          <li><a href="/privacy" rel="privacy-policy">Privacy</a></li>
+          <li><a href="/terms" rel="terms-of-service">Terms</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
