@@ -45,7 +45,7 @@ A `Good signature` from the fingerprint above confirms this file is mine.
 
 **In scope**
 
-- The live site at <https://mehrtens.com>
+- The live site at <https://mehrtens.com>.
 - The source code in this repository.
 
 **Out of scope**
