@@ -1,0 +1,3 @@
+# CORS for browser-based WKD clients (gpg CLI doesn't need it)
+/.well-known/openpgpkey/*
+  Access-Control-Allow-Origin: *
