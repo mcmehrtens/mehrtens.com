@@ -53,7 +53,7 @@ A `Good signature` from the fingerprint above confirms this file is mine.
 - The hosting, DNS, and CDN platform (Cloudflare); report those issues to the
   provider.
 - Third-party dependencies with no demonstrated impact on this site; report
-  those to the dependency's own maintainers.
+  those to the dependency’s own maintainers.
 - Findings that require physical access, social engineering, or a compromised
   end-user device.
 - Volumetric denial-of-service and raw scanner output without a demonstrated,
