@@ -1,0 +1,212 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Terms of Service - Matthew Mehrtens";
+const description = "Terms of service for mehrtens.com.";
+
+interface TermsChange {
+  date: string;
+  change: string;
+}
+
+const termsChanges: TermsChange[] = [
+  {
+    date: "2026-06-29",
+    change: "First published",
+  },
+];
+
+const ordered = [...termsChanges].sort((a, b) => b.date.localeCompare(a.date));
+const latest = ordered[0];
+const firstPublished = ordered[ordered.length - 1].date;
+---
+
+<BaseLayout title={title} description={description}>
+  <article aria-labelledby="terms-of-service">
+    <header>
+      <h1 id="terms-of-service">Terms of Service</h1>
+      <p>
+        Published: <time datetime={firstPublished}
+          >{
+            new Date(firstPublished).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "UTC",
+            })
+          }</time
+        >
+      </p>
+      <p>
+        Last updated: <time datetime={latest.date}
+          >{
+            new Date(latest.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "UTC",
+            })
+          }</time
+        >
+      </p>
+    </header>
+    <p>
+      <b>Summary:</b> This is my personal website—a place for my writing, projects,
+      and background. You’re welcome to read it, link to it, and share it. The writing,
+      images, and code here are openly licensed—you may reuse and build on them, even
+      commercially, as long as you credit me. I publish everything in good faith but
+      provide it “as is,” the views are my own, nothing here is professional advice,
+      and I can’t be held liable if you rely on something and it doesn’t work out.
+      Beyond that, just use the site lawfully and don’t try to break it.
+    </p>
+
+    <h2>Agreement to these terms</h2>
+    <p>
+      By visiting and using <a href={Astro.site}>mehrtens.com</a> (the “site”), you
+      agree to these Terms of Service. If you don’t agree with them, please don’t
+      use the site. These terms apply to everyone who accesses the site.
+    </p>
+
+    <h2>Who runs this site</h2>
+    <p>
+      This website <a href={Astro.site}>mehrtens.com</a> is operated by Matthew Mehrtens
+      as a personal, non-commercial project. There are no accounts, comments, purchases,
+      or contact forms—it’s simply a place to read what I publish. If you have any
+      questions about these terms, you can reach me at <a
+        href="mailto:legal@mehrtens.com">legal@mehrtens.com</a
+      >.
+    </p>
+
+    <h2>Licensing and reuse</h2>
+    <p>
+      This site is openly licensed, and you’re encouraged to build on it. Two
+      licenses apply, both recorded in the repository’s <a
+        href="https://github.com/mcmehrtens/mehrtens.com/blob/main/LICENSE"
+        rel="license">LICENSE</a
+      > file:
+    </p>
+    <ul>
+      <li>
+        The <b>source code</b> of this site is released under the <a
+          href="https://github.com/mcmehrtens/mehrtens.com/blob/main/LICENSE"
+          rel="license">MIT License</a
+        >.
+      </li>
+      <li>
+        All other <b>content</b>—the text of my posts, images, and design—is
+        licensed under <a
+          href="https://creativecommons.org/licenses/by/4.0/"
+          rel="license">Creative Commons Attribution 4.0 International</a
+        > (CC BY 4.0).
+      </li>
+    </ul>
+    <p>
+      In plain terms: you may copy, share, adapt, and reuse the content for any
+      purpose, including commercially, as long as you give appropriate credit,
+      link to the license, and indicate whether you made changes. Please don’t
+      suggest that I endorse you or your use of the work. Where this summary and
+      the license texts differ, the licenses control.
+    </p>
+
+    <h2>Acceptable use</h2>
+    <p>Please use the site lawfully and in good faith. In particular, don’t:</p>
+    <ul>
+      <li>
+        attempt to gain unauthorized access to the site or the infrastructure it
+        runs on;
+      </li>
+      <li>
+        attempt to breach or circumvent the site’s security measures, or test
+        for vulnerabilities other than through good-faith research conducted in
+        accordance with my <a
+          href="https://github.com/mcmehrtens/mehrtens.com/blob/main/SECURITY.md"
+          >security policy</a
+        >;
+      </li>
+      <li>
+        interfere with or disrupt the site—for example, through excessive
+        automated requests, scraping that places an unreasonable load on it, or
+        denial-of-service attempts; or
+      </li>
+      <li>use the site to violate any law or infringe anyone’s rights.</li>
+    </ul>
+
+    <h2>Disclaimer</h2>
+    <p>
+      I publish this site in good faith and try to keep it accurate, but I
+      provide it “as is” and “as available,” without warranties of any kind,
+      whether express or implied. I don’t guarantee that the content is
+      accurate, complete, current, or free of errors, or that the site will
+      always be available or uninterrupted.
+    </p>
+    <p>
+      Anything I write here reflects my own personal views, not those of my
+      employer, my university, or any organization I’m affiliated with. Nothing
+      on this site is professional advice—technical, engineering, legal,
+      financial, or otherwise—and you shouldn’t treat it as a substitute for
+      advice from a qualified professional. Any use you make of the content is
+      at your own risk.
+    </p>
+
+    <h2>Links to other sites</h2>
+    <p>
+      This site may link to third-party websites and resources that I don’t
+      operate or control. I provide those links for convenience, and including
+      one doesn’t mean I endorse the site or everything on it. I’m not
+      responsible for the content, accuracy, availability, or practices of any
+      third-party site, and visiting them is at your own discretion.
+    </p>
+
+    <h2>Limitation of liability</h2>
+    <p>
+      To the fullest extent permitted by law, I won’t be liable for any damages
+      arising out of or related to your use of—or inability to use—this site or
+      its content, including any direct, indirect, incidental, or consequential
+      damages, even where the possibility of such damages was known.
+    </p>
+
+    <h2>Governing law</h2>
+    <p>
+      These terms are governed by the laws of the State of Iowa and the United
+      States, without regard to conflict-of-law principles.
+    </p>
+
+    <h2>Severability</h2>
+    <p>
+      If any part of these terms is found to be unenforceable, that part will be
+      limited or removed to the minimum extent necessary, and the rest will
+      remain in full effect.
+    </p>
+
+    <h2>Changes to these terms</h2>
+    <p>
+      I may update these terms from time to time—for example, if I add new
+      features to the site. When I do, I’ll revise the “last updated” date above
+      and add to the running changelog below. Your continued use of the site
+      after an update means you accept the revised terms.
+    </p>
+    <table>
+      <caption>
+        Changes that have been made to these terms of service.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          ordered.map((a) => (
+            <tr>
+              <td>
+                <time datetime={a.date}>{a.date}</time>
+              </td>
+              <td>{a.change}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </article>
+</BaseLayout>
