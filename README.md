@@ -2,6 +2,9 @@
 
 A little space on the world wide web, for me, Matthew Mehrtens.
 
+[![CI](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/ci.yml)
+[![security.txt checks](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/security-txt-expiry.yml/badge.svg?branch=main)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/security-txt-expiry.yml)
+
 ## About
 
 This is my personal website that I use to introduce myself, showcase my
