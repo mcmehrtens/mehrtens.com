@@ -1,2 +1,3 @@
 pnpm run verify
+pnpm run verify:site
 pnpm run check:security

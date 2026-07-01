@@ -1,0 +1,6 @@
+{
+  "recurse": true,
+  "skip": ["^(?!http://127\\.0\\.0\\.1)"],
+  "urlRewriteSearch": "^(http://127\\.0\\.0\\.1:4321/.+)/$",
+  "urlRewriteReplace": "$1"
+}
