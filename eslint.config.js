@@ -77,7 +77,12 @@ export default defineConfig([
     extends: ["css/recommended"],
   },
   {
-    files: ["playwright.config.ts", "tests/**/*.ts", "lighthouserc.cjs"],
+    files: [
+      "scripts/**/*.{js,mjs}",
+      "playwright.config.ts",
+      "tests/**/*.ts",
+      "lighthouserc.cjs",
+    ],
     languageOptions: { globals: globals.node },
   },
   {

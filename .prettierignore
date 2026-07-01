@@ -3,4 +3,6 @@ playwright-report/
 test-results/
 .lighthouseci/
 lighthouse-reports/
+lighthouse-summary.md
+lighthouse-badges.json
 lychee/

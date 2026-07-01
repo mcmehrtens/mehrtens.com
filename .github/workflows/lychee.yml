@@ -15,6 +15,7 @@ concurrency:
 permissions:
   contents: read
   issues: write
+  pull-requests: write
 
 jobs:
   links:
@@ -49,12 +50,46 @@ jobs:
           fail: false
           jobSummary: true
 
-      - name: Create issue on broken links
+      - name: Comment results on PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
+        with:
+          header: lychee
+          path: ./lychee/out.md
+
+      - name: Open issue on broken links
         if:
           ${{ github.event_name == 'schedule' && steps.lychee.outputs.exit_code
           != 0 }}
-        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
-          title: Broken external links (weekly sweep)
-          content-filepath: ./lychee/out.md
-          labels: automated, broken-links
+          script: |
+            const body = require("node:fs").readFileSync(
+              "./lychee/out.md",
+              "utf8",
+            );
+            const title = "Broken external links (weekly sweep)";
+            const labels = ["automated", "broken-links"];
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: labels.join(","),
+            });
+            const existing = open.find((issue) => issue.title === title);
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                labels,
+                body,
+              });
+            }

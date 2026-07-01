@@ -14,6 +14,8 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
   lighthouse:
@@ -40,6 +42,75 @@ jobs:
       - name: Lighthouse CI
         run: pnpm run lighthouse
         continue-on-error: true
+
+      - name: Score summary
+        id: summary
+        if: ${{ !cancelled() }}
+        run: node scripts/lighthouse-summary.mjs
+
+      - name: Comment scores on PR
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
+        with:
+          header: lighthouse
+          path: lighthouse-summary.md
+
+      - name: Open issue on scheduled regression
+        if:
+          ${{ !cancelled() && github.event_name == 'schedule' &&
+          steps.summary.outputs.has_regression == 'true' }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const body = require("node:fs").readFileSync(
+              "lighthouse-summary.md",
+              "utf8",
+            );
+            const title = "Lighthouse regression (weekly sweep)";
+            const labels = ["automated", "lighthouse"];
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: labels.join(","),
+            });
+            const existing = open.find((issue) => issue.title === title);
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                labels,
+                body,
+              });
+            }
+
+      - name: Update badges
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.GIST_TOKEN }}
+          script: |
+            const badges = JSON.parse(
+              require("node:fs").readFileSync("lighthouse-badges.json", "utf8"),
+            );
+            const files = Object.fromEntries(
+              Object.entries(badges).map(([name, content]) => [
+                name,
+                { content: JSON.stringify(content) },
+              ]),
+            );
+            await github.rest.gists.update({
+              gist_id: "820df8fd7ec1ecb0ffd03f0727ba9222",
+              files,
+            });
 
       - name: Upload Lighthouse reports
         if: ${{ !cancelled() }}
