@@ -9,7 +9,17 @@ import eslintConfigPrettier from "eslint-config-prettier/flat";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  { ignores: ["dist/**", ".astro/**"] },
+  {
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      "playwright-report/**",
+      "test-results/**",
+      ".lighthouseci/**",
+      "lighthouse-reports/**",
+      "lychee/**",
+    ],
+  },
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     plugins: { js },
@@ -57,6 +67,14 @@ export default defineConfig([
     plugins: { css },
     language: "css/css",
     extends: ["css/recommended"],
+  },
+  {
+    files: ["playwright.config.ts", "tests/**/*.ts", "lighthouserc.cjs"],
+    languageOptions: { globals: globals.node },
+  },
+  {
+    files: ["lighthouserc.cjs"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
   },
   eslintConfigPrettier,
 ]);

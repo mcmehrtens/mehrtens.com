@@ -1,1 +1,6 @@
 pnpm-lock.yaml
+playwright-report/
+test-results/
+.lighthouseci/
+lighthouse-reports/
+lychee/

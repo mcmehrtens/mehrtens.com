@@ -21,3 +21,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# test & report artifacts
+playwright-report/
+test-results/
+.lighthouseci/
+lighthouse-reports/
+lychee/
