@@ -29,5 +29,6 @@ test-results/
 lighthouse-reports/
 lighthouse-summary.md
 lighthouse-badges.json
+lighthouse-regression.txt
 lychee/
 .lycheecache

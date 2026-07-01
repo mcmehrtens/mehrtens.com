@@ -46,7 +46,10 @@ jobs:
       - name: Score summary
         id: summary
         if: ${{ !cancelled() }}
-        run: node scripts/lighthouse-summary.mjs
+        run: |
+          node scripts/lighthouse-summary.mjs
+          cat lighthouse-summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo "has_regression=$(cat lighthouse-regression.txt)" >> "$GITHUB_OUTPUT"
 
       - name: Comment scores on PR
         if: ${{ !cancelled() && github.event_name == 'pull_request' }}

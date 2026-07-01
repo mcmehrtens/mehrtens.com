@@ -1,9 +1,4 @@
-import {
-  readFileSync,
-  writeFileSync,
-  appendFileSync,
-  existsSync,
-} from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 
 const THRESHOLD = 90;
 const PROFILES = ["mobile", "desktop", "low-end"];
@@ -79,17 +74,9 @@ const badges = Object.fromEntries(
   }),
 );
 
+// Write only constant-named artifacts; the workflow wires these into
+// $GITHUB_STEP_SUMMARY and $GITHUB_OUTPUT via shell redirection.
 writeFileSync("lighthouse-summary.md", `${markdown}\n`);
 writeFileSync("lighthouse-badges.json", `${JSON.stringify(badges, null, 2)}\n`);
+writeFileSync("lighthouse-regression.txt", String(hasData && hasRegression));
 console.log(markdown);
-console.log(`\n${JSON.stringify(badges)}`);
-
-if (process.env.GITHUB_STEP_SUMMARY) {
-  appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${markdown}\n`);
-}
-if (process.env.GITHUB_OUTPUT) {
-  appendFileSync(
-    process.env.GITHUB_OUTPUT,
-    `has_regression=${hasData && hasRegression}\n`,
-  );
-}
