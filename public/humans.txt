@@ -1,0 +1,14 @@
+/* TEAM */
+
+Author: Matthew Mehrtens
+Site: https://mehrtens.com
+Contact: matthew [at] mehrtens.com
+Location: Ames, Iowa, United States
+
+/* SITE */
+
+Last update: 2026-07-01
+Language: English
+Standards: WHATWG HTML Living Standard
+Components: Astro, TypeScript
+Source: https://github.com/mcmehrtens/mehrtens.com
