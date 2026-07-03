@@ -3,9 +3,121 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const title = "Contact - Matthew Mehrtens";
 const description = "How to get in touch with Matthew Mehrtens.";
+const pageTitle = "Contact";
+
+const site = Astro.site;
+const pageUrl = new URL(Astro.url.pathname, site).href;
+const pgpKeyUrl = "/.well-known/pgp-key.txt";
+const securityTxtUrl = "/.well-known/security.txt";
+const securityPolicyUrl =
+  "https://github.com/mcmehrtens/mehrtens.com/blob/main/SECURITY.md";
+
+const email = {
+  general: "matthew@mehrtens.com",
+  security: "security@mehrtens.com",
+  privacy: "privacy@mehrtens.com",
+  legal: "legal@mehrtens.com",
+};
+
+const pgpFingerprint = "A7AB 023C 328D 3C18 1F7B 7926 F69D A256 6D80 4943";
+
+const signalUrl =
+  "https://signal.me/#eu/j1kQxzlxuJKfH5THpshp334Yu9DTyC4whM9qdBmT1f4f0zWukxtHBI4VXj4VeUrn";
+const discordUsername = "mcmehrtens";
+
+const emailContactPoints = [
+  { contactType: "general inquiries", email: email.general },
+  { contactType: "security", email: email.security },
+  { contactType: "privacy", email: email.privacy },
+  { contactType: "legal", email: email.legal },
+].map((cp) => ({ "@type": "ContactPoint", ...cp }));
+
+const graph = [
+  {
+    "@type": "ContactPage",
+    "@id": `${pageUrl}#webpage`,
+    author: { "@id": `${site}#person` },
+    isPartOf: { "@id": `${site}#website` },
+    mainEntity: {
+      "@type": "Person",
+      "@id": `${site}#person`,
+      contactPoint: emailContactPoints,
+    },
+    name: pageTitle,
+    url: pageUrl,
+  },
+];
 ---
 
-<BaseLayout title={title} description={description}
-  ><h1>Contact</h1>
-  <p>Nothing here yet—check back soon.</p></BaseLayout
->
+<BaseLayout title={title} description={description} graph={graph}>
+  <h1>{pageTitle}</h1>
+  <p>
+    The best way to reach me is email. I’ll usually reply within a few days. If
+    your message is sensitive, you can <a href="#encrypted-email">encrypt it</a
+    >. I’m also on Signal and Discord, but email is what I check most reliably.
+  </p>
+
+  <h2>Email</h2>
+  <p>
+    For anything general—questions, ideas, or just to say hello—write to <a
+      href={`mailto:${email.general}`}>{email.general}</a
+    >.
+  </p>
+  <p>
+    I also keep a few purpose-specific addresses. They all go to the same inbox,
+    but they help me keep mail organized:
+  </p>
+  <ul>
+    <li>
+      <a href={`mailto:${email.security}`}>{email.security}</a> - security vulnerabilities
+      and disclosures. See my <a href={securityPolicyUrl}>security policy</a> and{
+        " "
+      }
+      <a href={securityTxtUrl}>security.txt</a> for scope.
+    </li>
+    <li>
+      <a href={`mailto:${email.privacy}`}>{email.privacy}</a> - questions or requests
+      about privacy and your data, as described in my <a href="/privacy"
+        >privacy policy</a
+      >.
+    </li>
+    <li>
+      <a href={`mailto:${email.legal}`}>{email.legal}</a> - legal notices, licensing,
+      and anything covered by my <a href="/terms">terms of service</a>.
+    </li>
+  </ul>
+
+  <h2 id="encrypted-email">Encrypted email (<abbr>PGP</abbr>)</h2>
+  <p>
+    If you’d like to send me encrypted email, I publish an <a
+      href="https://www.openpgp.org/about/">OpenPGP</a
+    > key. Its fingerprint is:
+  </p>
+  <p><code>{pgpFingerprint}</code></p>
+  <p>
+    You can download it directly from <a href={pgpKeyUrl}
+      >/.well-known/pgp-key.txt</a
+    >, or let your mail client fetch it automatically over <a
+      href="https://wiki.gnupg.org/WKD">Web Key Directory (<abbr>WKD</abbr>)</a
+    >:
+  </p>
+  <pre><code>gpg --locate-keys {email.general}</code></pre>
+  <p>
+    The same key also covers <a href={`mailto:${email.security}`}
+      >{email.security}</a
+    >.
+  </p>
+
+  <h2>Other ways to reach me</h2>
+  <p>Email is the most reliable, but I’m also on:</p>
+  <ul>
+    <li>
+      <b>Signal:</b>{" "}
+      <a href={signalUrl}>message me on Signal</a>
+    </li>
+    <li>
+      <b>Discord:</b>{" "}
+      {discordUsername}
+    </li>
+  </ul>
+</BaseLayout>
