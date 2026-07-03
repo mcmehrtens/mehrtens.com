@@ -40,19 +40,26 @@ for (const name of names) {
     const meta = await response.json();
     const times = meta.time ?? {};
     const aged = Object.keys(meta.versions ?? {})
-      .filter((version) => !version.includes("-"))
-      .filter((version) => {
-        const published = times[version];
-        return published && now - Date.parse(published) >= MIN_AGE_MS;
-      })
-      .sort(compareVersions);
+      .map((version) => ({
+        version,
+        published: Date.parse(times[version] ?? ""),
+      }))
+      .filter(
+        ({ version, published }) =>
+          /^\d+\.\d+\.\d+$/.test(version) &&
+          Number.isFinite(published) &&
+          now - published >= MIN_AGE_MS,
+      )
+      .sort((a, b) => compareVersions(a.version, b.version));
     const latest = aged.at(-1);
-    if (latest && compareVersions(latest, current) > 0) {
+    if (latest && compareVersions(latest.version, current) > 0) {
+      // Reconstruct both fields from parsed numbers so no string from the
+      // (untrusted) registry response is written to the file or issue verbatim.
       updates.push({
         name,
         current,
-        available: latest,
-        released: times[latest].slice(0, 10),
+        available: parseVersion(latest.version).join("."),
+        released: new Date(latest.published).toISOString().slice(0, 10),
       });
     }
   } catch (error) {
