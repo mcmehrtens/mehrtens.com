@@ -2,12 +2,12 @@
 
 A little space on the world wide web, for me, Matthew Mehrtens.
 
-[![CI](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/ci.yml)
-[![security.txt checks](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/security-txt-expiry.yml/badge.svg?branch=main)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/security-txt-expiry.yml)
-[![Lighthouse performance](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-performance.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yml)
-[![Lighthouse accessibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-accessibility.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yml)
-[![Lighthouse best practices](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-best-practices.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yml)
-[![Lighthouse SEO](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-seo.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yml)
+[![CI](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/ci.yaml)
+[![security.txt checks](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/security-txt-expiry.yaml/badge.svg?branch=main)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/security-txt-expiry.yaml)
+[![Lighthouse performance](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-performance.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yaml)
+[![Lighthouse accessibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-accessibility.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yaml)
+[![Lighthouse best practices](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-best-practices.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yaml)
+[![Lighthouse SEO](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fmcmehrtens%2F820df8fd7ec1ecb0ffd03f0727ba9222%2Fraw%2Flighthouse-seo.json)](https://github.com/mcmehrtens/mehrtens.com/actions/workflows/lighthouse.yaml)
 
 ## About
 
