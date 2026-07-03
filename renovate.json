@@ -1,0 +1,29 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "timezone": "America/Chicago",
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "separateMajorMinor": false,
+  "prConcurrentLimit": 5,
+  "constraints": {
+    "pnpm": ">=11.9.0"
+  },
+  "packageRules": [
+    {
+      "description": "Group all npm updates into one PR (mirrors Dependabot all-dependencies)",
+      "matchManagers": ["npm"],
+      "groupName": "npm dependencies"
+    },
+    {
+      "description": "Group all GitHub Actions updates into one PR (mirrors Dependabot all-actions)",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "description": "Astro is upgraded manually via @astrojs/upgrade; tracked by the astro-update workflow",
+      "matchPackageNames": ["astro", "@astrojs/**"],
+      "enabled": false
+    }
+  ]
+}

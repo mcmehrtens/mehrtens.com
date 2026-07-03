@@ -84,13 +84,15 @@ These measures keep the site and its supply chain healthy:
 
 - **Minimal, audited dependencies.** The dependency surface is kept small and
   reviewed before adoption.
-- **Cooldown before adoption.** Dependency updates are held for a minimum
-  cooldown (currently 7 days) before they become eligible to merge, reducing
-  exposure to compromised or yanked releases.
+- **Release-age cooldown.** Dependency updates are held for a minimum release
+  age (currently 7 days) before they become eligible to merge. Renovate will not
+  open a pull request for a younger release, and pnpm’s `minimumReleaseAge`
+  additionally blocks too-new transitive dependencies when the lockfile is
+  regenerated, reducing exposure to compromised or yanked releases.
 - **Transitive CVE remediation.** Known-vulnerable transitive dependencies are
   force-resolved to patched versions via pnpm `overrides`, even before the
   direct dependency adopts the fix upstream.
-- **Automated updates.** Dependabot proposes grouped npm and GitHub Actions
+- **Automated updates.** Renovate proposes grouped npm and GitHub Actions
   updates on a weekly schedule.
 - **Pinned CI.** GitHub Actions are pinned to full commit SHAs.
 - **Enforced quality gate.** Every change must pass linting, formatting,
