@@ -14,6 +14,7 @@ permissions:
 jobs:
   preview:
     name: Upload PR preview to Cloudflare Workers
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
