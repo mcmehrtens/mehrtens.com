@@ -42,8 +42,8 @@ hear that feedback, too.
   [axe-core](https://github.com/dequelabs/axe-core) (automated accessibility
   testing), [GitHub Actions](https://docs.github.com/en/actions) (continuous
   integration and continuous deployment or CI/CD),
-  [Dependabot](https://docs.github.com/en/code-security/tutorials/secure-your-dependencies/dependabot-quickstart#about-dependabot)
-  (automated dependency updates), and many more.
+  [Renovate](https://docs.renovatebot.com/) (automated dependency updates), and
+  many more.
 
 ## Getting started
 
