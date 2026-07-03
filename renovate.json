@@ -24,6 +24,11 @@
       "description": "Astro is upgraded manually via @astrojs/upgrade; tracked by the astro-update workflow",
       "matchPackageNames": ["astro", "@astrojs/**"],
       "enabled": false
+    },
+    {
+      "description": "Hand-pinned CVE-remediation floors; do not update",
+      "matchFileNames": ["pnpm-workspace.yaml"],
+      "enabled": false
     }
   ]
 }
