@@ -7,7 +7,7 @@ Location: Ames, Iowa, United States
 
 /* SITE */
 
-Last update: 2026-07-01
+Last update: 2026-07-02
 Language: English
 Standards: WHATWG HTML Living Standard
 Components: Astro, TypeScript
