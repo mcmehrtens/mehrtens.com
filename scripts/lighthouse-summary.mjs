@@ -11,10 +11,8 @@ const CATEGORIES = [
 
 const pct = (score) => Math.round(score * 100);
 const icon = (value) => (value >= 90 ? "🟢" : value >= 50 ? "🟠" : "🔴");
-// GitHub's own workflow badges paint "passing" with #28a745; match it here so
-// the Lighthouse badges sit next to them without a green mismatch.
 const colorOf = (value) =>
-  value >= 90 ? "#28a745" : value >= 50 ? "orange" : "red";
+  value >= 90 ? "brightgreen" : value >= 50 ? "orange" : "red";
 const pathOf = (url) => new URL(url).pathname;
 
 const categoryMin = {};
