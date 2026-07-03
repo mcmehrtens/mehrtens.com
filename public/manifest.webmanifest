@@ -1,6 +1,8 @@
 {
-  "name": "Matthew Mehrtens",
-  "short_name": "mehrtens.com",
+  "background_color": "#ffffff",
+  "description": "The personal website of Matthew Mehrtens.",
+  "display": "standalone",
+  "display_override": ["minimal-ui"],
   "icons": [
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" },
@@ -11,7 +13,10 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "id": "/",
+  "name": "mehrtens.com",
+  "orientation": "any",
+  "scope": "/",
+  "start_url": "/",
+  "theme_color": "#ffffff"
 }
