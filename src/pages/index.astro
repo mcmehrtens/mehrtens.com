@@ -23,9 +23,18 @@ const graph = [
     url: `${site}`,
   },
 ];
+const og = {
+  type: "profile" as const,
+  profile: {
+    firstName: "Matthew",
+    lastName: "Mehrtens",
+    username: "mcmehrtens",
+    gender: "male" as const,
+  },
+};
 ---
 
-<BaseLayout title={title} description={description} graph={graph}>
+<BaseLayout title={title} description={description} graph={graph} og={og}>
   <article aria-labelledby="about-me">
     <header>
       <h1 id="about-me">{pageTitle}</h1>

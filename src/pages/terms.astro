@@ -35,9 +35,19 @@ const graph = [
     url: pageUrl,
   },
 ];
+const og = {
+  type: "article" as const,
+  article: {
+    publishedTime: firstPublished,
+    modifiedTime: latest.date,
+    author: new URL("/", site).href,
+    section: "Legal",
+    tag: ["terms"],
+  },
+};
 ---
 
-<BaseLayout title={title} description={description} graph={graph}>
+<BaseLayout title={title} description={description} graph={graph} og={og}>
   <article aria-labelledby="terms-of-service">
     <header>
       <h1 id="terms-of-service">{pageTitle}</h1>

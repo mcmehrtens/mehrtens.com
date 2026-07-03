@@ -6,8 +6,50 @@ interface Props {
   title: string;
   description: string;
   graph?: Record<string, unknown>[];
+  og?: {
+    type?: "website" | "article" | "profile";
+    article?: {
+      publishedTime?: string;
+      modifiedTime?: string;
+      expirationTime?: string;
+      author?: string | string[];
+      section?: string;
+      tag?: string | string[];
+    };
+    profile?: {
+      firstName?: string;
+      lastName?: string;
+      username?: string;
+      gender?: "male" | "female";
+    };
+  };
 }
-const { title, description, graph = [] } = Astro.props;
+const { title, description, graph = [], og = {} } = Astro.props;
+
+const ogType = og.type ?? "website";
+const ogExtras: { property: string; content: string }[] = [];
+const pushOg = (property: string, value?: string | string[]) => {
+  if (!value) return;
+  for (const content of Array.isArray(value) ? value : [value]) {
+    ogExtras.push({ property, content });
+  }
+};
+if (ogType === "article" && og.article) {
+  const a = og.article;
+  pushOg("article:published_time", a.publishedTime);
+  pushOg("article:modified_time", a.modifiedTime);
+  pushOg("article:expiration_time", a.expirationTime);
+  pushOg("article:author", a.author);
+  pushOg("article:section", a.section);
+  pushOg("article:tag", a.tag);
+}
+if (ogType === "profile" && og.profile) {
+  const p = og.profile;
+  pushOg("profile:first_name", p.firstName);
+  pushOg("profile:last_name", p.lastName);
+  pushOg("profile:username", p.username);
+  pushOg("profile:gender", p.gender);
+}
 
 const pathname = Astro.url.pathname;
 const site = Astro.site;
@@ -199,6 +241,14 @@ const structuredData = {
     <title>{title}</title>
     <meta name="author" content="Matthew Mehrtens" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="mehrtens.com" />
+    {ogExtras.map((m) => <meta property={m.property} content={m.content} />)}
+    <meta name="twitter:card" content="summary" />
     <script
       is:inline
       type="application/ld+json"

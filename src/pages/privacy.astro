@@ -37,9 +37,19 @@ const graph = [
     url: pageUrl,
   },
 ];
+const og = {
+  type: "article" as const,
+  article: {
+    publishedTime: firstPublished,
+    modifiedTime: latest.date,
+    author: new URL("/", site).href,
+    section: "Legal",
+    tag: ["privacy"],
+  },
+};
 ---
 
-<BaseLayout title={title} description={description} graph={graph}>
+<BaseLayout title={title} description={description} graph={graph} og={og}>
   <article aria-labelledby="privacy-policy">
     <header>
       <h1 id="privacy-policy">{pageTitle}</h1>
