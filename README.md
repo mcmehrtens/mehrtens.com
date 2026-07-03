@@ -145,5 +145,9 @@ The site is deployed on
 [Cloudflare Workers](https://www.cloudflare.com/products/workers/), with its
 static assets served from
 [Cloudflare R2](https://www.cloudflare.com/products/r2/). A merge to `main`
-triggers Cloudflare to build and publish the site automatically, so `main`
-always reflects what’s live.
+triggers a [GitHub Actions](https://docs.github.com/en/actions) workflow that
+builds the site and deploys it with
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/), so `main`
+always reflects what’s live. Every pull request also deploys to its own isolated
+[preview URL](https://developers.cloudflare.com/workers/configuration/previews/)
+so changes can be checked before they merge.
