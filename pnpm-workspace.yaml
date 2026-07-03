@@ -10,7 +10,7 @@ minimumReleaseAgeExclude:
 # @astrojs/check / @lhci/cli). The selector syntax only rewrites the vulnerable
 # range, so already-safe copies (e.g. yaml@2.9.0) are left untouched.
 overrides:
-  js-yaml@<4.2.0: ^4.2.0 # GHSA-h67p-54hq-rp68 (quadratic-complexity DoS)
+  js-yaml@<4.2.0: ^5.0.0 # GHSA-h67p-54hq-rp68 (quadratic-complexity DoS)
   "yaml@>=2.0.0 <2.8.3": ^2.8.3 # GHSA-48c2-rrv3-qjmp (stack overflow via nested collections)
   tmp@<0.2.6: ^0.2.6 # GHSA-ph9p-34f9-6g65 (path traversal), GHSA-52f5-9888-hmc6 (symlink dir write)
-  uuid@<11.1.1: ^11.1.1 # GHSA-w5hq-g745-h8pq (missing buffer bounds check in v3/v5/v6)
+  uuid@<11.1.1: ^14.0.0 # GHSA-w5hq-g745-h8pq (missing buffer bounds check in v3/v5/v6)
