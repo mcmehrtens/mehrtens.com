@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const title = "Hall of Fame - Matthew Mehrtens";
 const description =
   "Security researchers who have responsibly disclosed vulnerabilities affecting mehrtens.com.";
+const pageTitle = "Security Hall of Fame";
 
 interface Acknowledgment {
   date: string;
@@ -22,10 +23,23 @@ const acknowledgments: Acknowledgment[] = [
 const ordered = [...acknowledgments].sort((a, b) =>
   b.date.localeCompare(a.date),
 );
+
+const site = Astro.site;
+const pageUrl = new URL(Astro.url.pathname, site).href;
+const graph = [
+  {
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    author: { "@id": `${site}#person` },
+    isPartOf: { "@id": `${site}#website` },
+    name: pageTitle,
+    url: pageUrl,
+  },
+];
 ---
 
-<BaseLayout title={title} description={description}
-  ><h1>Security Hall of Fame</h1>
+<BaseLayout title={title} description={description} graph={graph}
+  ><h1>{pageTitle}</h1>
   <p>
     I’m grateful to the security researchers below, who responsibly disclosed
     vulnerabilities and helped keep this site safe. If you’ve found a security
