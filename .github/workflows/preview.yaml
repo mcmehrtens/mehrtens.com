@@ -34,7 +34,7 @@ jobs:
         run: |
           out=$(pnpm exec wrangler versions upload --preview-alias "pr-${{ github.event.pull_request.number }}")
           echo "$out"
-          url=$(echo "$out" | grep -oE 'https://pr-[0-9]+-[a-z0-9-]+\.workers\.dev' | head -1)
+          url=$(echo "$out" | grep -oE 'https://pr-[0-9]+-[a-z0-9.-]+\.workers\.dev' | head -1)
           echo "url=$url" >> "$GITHUB_OUTPUT"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
