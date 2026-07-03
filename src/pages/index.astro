@@ -4,57 +4,104 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const title = "Matthew Mehrtens";
 const description =
   "Personal site of Matthew Mehrtens—a Ph.D. student in engineering mechanics at Iowa State University with a deep passion for computers and consumer technology.";
+
+const site = Astro.site;
+const pageTitle = "About Me";
+const published = "2026-07-02";
+const lastUpdated = "2026-07-02";
+
+const graph = [
+  {
+    "@type": "ProfilePage",
+    "@id": `${site}#profilepage`,
+    author: { "@id": `${site}#person` },
+    dateModified: lastUpdated,
+    datePublished: published,
+    isPartOf: { "@id": `${site}#website` },
+    mainEntity: { "@id": `${site}#person` },
+    name: pageTitle,
+    url: `${site}`,
+  },
+];
 ---
 
-<BaseLayout title={title} description={description}
-  ><h1>About Me</h1>
-  <p>
-    I’m a Ph.D. student at Iowa State University (<abbr>ISU</abbr>) studying <a
-      href="https://www.grad-college.iastate.edu/programs/engineering_mechanics"
-      >engineering mechanics</a
-    >, with a focus on <a
-      href="https://en.wikipedia.org/wiki/Continuum_mechanics"
-      >solid continuum mechanics</a
-    > and <a href="https://en.wikipedia.org/wiki/Fluid_dynamics"
-      >fluid dynamics</a
-    >. My research is on the topological optimization of <a
-      href="https://en.wikipedia.org/wiki/Solid-propellant_rocket"
-      >solid composite propellants (<abbr>SCP</abbr>)</a
-    >, work supported by the <a href="https://ndseg.sysplus.com/NDSEG/about/"
-      >National Defense Science and Engineering Graduate (<abbr>NDSEG</abbr>)
-      Fellowship</a
-    > awarded to me in spring 2026. I received my B.S. in aerospace engineering from
-    Iowa State in May 2025, during which I spent two and a half years as a systems
-    and software engineering intern at <a
-      href="https://www.rtx.com/collinsaerospace">Collins Aerospace</a
-    >. I’m currently a fellow in the <a
-      href="https://www.lanl.gov/engage/organizations/xcp/computational-physics-student-summer-workshop"
-      >2026 Computational Physics Student Summer Workshop</a
-    > at <a href="https://www.lanl.gov"
-      >Los Alamos National Laboratory (<abbr>LANL</abbr>)</a
-    >.
-  </p>
-  <p>
-    Although my education and experience is deeply intertwined with aerospace
-    and national defense, my passion is for computers and consumer technology.
-    I’m deeply fascinated by topics such as compilers, networking, <a
-      href="https://en.wikipedia.org/wiki/Internet_of_things"
-      >Internet of Things (<abbr>IoT</abbr>)</a
-    >, and programming language design. I’m drawn to consumer technology because
-    of the fundamental constraints associated with the design and engineering of
-    consumer products—and by the (perhaps naïve) aspiration that improving a
-    product—even marginally—has the potential to directly improve the lives of
-    thousands, millions, or even billions of people, depending on the size of
-    the market.
-  </p>
-  <p>
-    Outside of tech and programming, I find my happy place listening to <a
-      href="https://music.apple.com/profile/mcmehrtens"
-      rel="me">music</a
-    >, watching movies, listening to podcasts, drinking coffee, and spending
-    quality time with my close friends. My goals in life are to leave a
-    positive, lasting impact on the world, either through my interactions with
-    the people I meet or the work I do in my career, and to learn everything
-    there is about computers and technology writ large.
-  </p></BaseLayout
->
+<BaseLayout title={title} description={description} graph={graph}>
+  <article aria-labelledby="about-me">
+    <header>
+      <h1 id="about-me">{pageTitle}</h1>
+      <p>
+        Published: <time datetime={published}
+          >{
+            new Date(published).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "UTC",
+            })
+          }</time
+        >
+      </p>
+      <p>
+        Last updated: <time datetime={lastUpdated}
+          >{
+            new Date(lastUpdated).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "UTC",
+            })
+          }</time
+        >
+      </p>
+    </header>
+    <p>
+      I’m a Ph.D. student at Iowa State University (<abbr>ISU</abbr>) studying <a
+        href="https://www.grad-college.iastate.edu/programs/engineering_mechanics"
+        >engineering mechanics</a
+      >, with a focus on <a
+        href="https://en.wikipedia.org/wiki/Continuum_mechanics"
+        >solid continuum mechanics</a
+      > and <a href="https://en.wikipedia.org/wiki/Fluid_dynamics"
+        >fluid dynamics</a
+      >. My research is on the topological optimization of <a
+        href="https://en.wikipedia.org/wiki/Solid-propellant_rocket"
+        >solid composite propellants (<abbr>SCP</abbr>)</a
+      >, work supported by the <a href="https://ndseg.sysplus.com/NDSEG/about/"
+        >National Defense Science and Engineering Graduate (<abbr>NDSEG</abbr>)
+        Fellowship</a
+      > awarded to me in spring 2026. I received my B.S. in aerospace engineering
+      from Iowa State in May 2025, during which I spent two and a half years as a
+      systems and software engineering intern at <a
+        href="https://www.rtx.com/collinsaerospace">Collins Aerospace</a
+      >. I’m currently a fellow in the <a
+        href="https://www.lanl.gov/engage/organizations/xcp/computational-physics-student-summer-workshop"
+        >2026 Computational Physics Student Summer Workshop</a
+      > at <a href="https://www.lanl.gov"
+        >Los Alamos National Laboratory (<abbr>LANL</abbr>)</a
+      >.
+    </p>
+    <p>
+      Although my education and experience is deeply intertwined with aerospace
+      and national defense, my passion is for computers and consumer technology.
+      I’m deeply fascinated by topics such as compilers, networking, <a
+        href="https://en.wikipedia.org/wiki/Internet_of_things"
+        >Internet of Things (<abbr>IoT</abbr>)</a
+      >, and programming language design. I’m drawn to consumer technology
+      because of the fundamental constraints associated with the design and
+      engineering of consumer products—and by the (perhaps naïve) aspiration
+      that improving a product—even marginally—has the potential to directly
+      improve the lives of thousands, millions, or even billions of people,
+      depending on the size of the market.
+    </p>
+    <p>
+      Outside of tech and programming, I find my happy place listening to <a
+        href="https://music.apple.com/profile/mcmehrtens"
+        rel="me">music</a
+      >, watching movies, listening to podcasts, drinking coffee, and spending
+      quality time with my close friends. My goals in life are to leave a
+      positive, lasting impact on the world, either through my interactions with
+      the people I meet or the work I do in my career, and to learn everything
+      there is about computers and technology writ large.
+    </p>
+  </article>
+</BaseLayout>
