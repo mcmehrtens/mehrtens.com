@@ -6,5 +6,6 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://mehrtens.com",
   trailingSlash: "never",
+  build: { inlineStylesheets: "never" },
   integrations: [sitemap()],
 });
