@@ -7,7 +7,7 @@ const description =
 
 const site = Astro.site;
 const pageTitle = "About Me";
-const published = "2026-07-02";
+const firstPublished = "2026-07-02";
 const lastUpdated = "2026-07-02";
 
 const graph = [
@@ -15,8 +15,9 @@ const graph = [
     "@type": "ProfilePage",
     "@id": `${site}#profilepage`,
     author: { "@id": `${site}#person` },
+    dateCreated: firstPublished,
     dateModified: lastUpdated,
-    datePublished: published,
+    datePublished: firstPublished,
     isPartOf: { "@id": `${site}#website` },
     mainEntity: { "@id": `${site}#person` },
     name: pageTitle,
@@ -39,9 +40,9 @@ const og = {
     <header>
       <h1 id="about-me">{pageTitle}</h1>
       <p>
-        Published: <time datetime={published}
+        Published: <time datetime={firstPublished}
           >{
-            new Date(published).toLocaleDateString("en-US", {
+            new Date(firstPublished).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",

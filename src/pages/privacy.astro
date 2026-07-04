@@ -30,6 +30,7 @@ const graph = [
     "@type": "WebPage",
     "@id": `${pageUrl}#webpage`,
     author: { "@id": `${site}#person` },
+    dateCreated: firstPublished,
     dateModified: latest.date,
     datePublished: firstPublished,
     isPartOf: { "@id": `${site}#website` },
