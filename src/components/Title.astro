@@ -1,0 +1,8 @@
+---
+import { titleFor } from "../utils/routes";
+
+const pathname = Astro.url.pathname;
+const title = titleFor(pathname);
+---
+
+<h1 id="pageTitle">{title}</h1>

@@ -1,9 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const title = "Privacy Policy - Matthew Mehrtens";
-const description = "Privacy policy for mehrtens.com.";
-const pageTitle = "Privacy Policy";
+import Title from "../components/Title.astro";
+import { titleFor } from "../utils/routes";
 
 interface PrivacyPolicyChange {
   date: string;
@@ -24,6 +22,10 @@ const latest = ordered[0];
 const firstPublished = ordered[ordered.length - 1].date;
 
 const site = Astro.site;
+const pathname = Astro.url.pathname;
+
+const title = titleFor(pathname);
+
 const pageUrl = new URL(Astro.url.pathname, site).href;
 const graph = [
   {
@@ -34,7 +36,7 @@ const graph = [
     dateModified: latest.date,
     datePublished: firstPublished,
     isPartOf: { "@id": `${site}#website` },
-    name: pageTitle,
+    name: title,
     url: pageUrl,
   },
 ];
@@ -50,10 +52,10 @@ const og = {
 };
 ---
 
-<BaseLayout title={title} description={description} graph={graph} og={og}>
-  <article aria-labelledby="privacy-policy">
+<BaseLayout graph={graph} og={og}>
+  <article aria-labelledby="pageTitle">
     <header>
-      <h1 id="privacy-policy">{pageTitle}</h1>
+      <Title />
       <p>
         Published: <time datetime={firstPublished}
           >{

@@ -1,12 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const title = "Contact - Matthew Mehrtens";
-const description = "How to get in touch with Matthew Mehrtens.";
-const pageTitle = "Contact";
+import Title from "../components/Title.astro";
+import { titleFor } from "../utils/routes";
 
 const site = Astro.site;
-const pageUrl = new URL(Astro.url.pathname, site).href;
+const pathname = Astro.url.pathname;
+
+const title = titleFor(pathname);
+
+const pageUrl = new URL(pathname, site).href;
 const pgpKeyUrl = "/.well-known/pgp-key.txt";
 const securityTxtUrl = "/.well-known/security.txt";
 const securityPolicyUrl =
@@ -43,14 +45,14 @@ const graph = [
       "@id": `${site}#person`,
       contactPoint: emailContactPoints,
     },
-    name: pageTitle,
+    name: title,
     url: pageUrl,
   },
 ];
 ---
 
-<BaseLayout title={title} description={description} graph={graph}>
-  <h1>{pageTitle}</h1>
+<BaseLayout graph={graph}>
+  <Title />
   <p>
     The best way to reach me is email. I’ll usually reply within a few days. If
     your message is sensitive, you can <a href="#encrypted-email">encrypt it</a

@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const title = "Matthew Mehrtens";
-const description =
-  "Personal site of Matthew Mehrtens—a Ph.D. student in engineering mechanics at Iowa State University with a deep passion for computers and consumer technology.";
+import Title from "../components/Title.astro";
+import { titleFor } from "../utils/routes";
 
 const site = Astro.site;
-const pageTitle = "About Me";
+const pathname = Astro.url.pathname;
+
+const title = titleFor(pathname);
+
 const firstPublished = "2026-07-02";
 const lastUpdated = "2026-07-02";
 
@@ -20,7 +21,7 @@ const graph = [
     datePublished: firstPublished,
     isPartOf: { "@id": `${site}#website` },
     mainEntity: { "@id": `${site}#person` },
-    name: pageTitle,
+    name: title,
     url: `${site}`,
   },
 ];
@@ -35,10 +36,10 @@ const og = {
 };
 ---
 
-<BaseLayout title={title} description={description} graph={graph} og={og}>
-  <article aria-labelledby="about-me">
+<BaseLayout graph={graph} og={og}>
+  <article aria-labelledby="pageTitle">
     <header>
-      <h1 id="about-me">{pageTitle}</h1>
+      <Title />
       <p>
         Published: <time datetime={firstPublished}
           >{
