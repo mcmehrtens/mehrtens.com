@@ -7,6 +7,7 @@ import {
   tabTitleFor,
   descriptionFor,
   breadcrumbFor,
+  breadcrumbListFor,
 } from "../utils/routes";
 
 interface Props {
@@ -65,6 +66,9 @@ const tabTitle = tabTitleFor(pathname);
 const description = descriptionFor(pathname);
 
 const renderBreadcrumb = breadcrumbFor(pathname).length > 1;
+const breadcrumbGraph = renderBreadcrumb
+  ? [breadcrumbListFor(pathname, site)]
+  : [];
 
 const publishedDate = "2026-07-02";
 const publishedYear = 2026;
@@ -232,6 +236,7 @@ const structuredData = {
       name: "mehrtens.com",
       url: `${site}`,
     },
+    ...breadcrumbGraph,
     ...graph,
   ],
 };

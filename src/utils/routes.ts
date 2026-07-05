@@ -82,3 +82,17 @@ export function breadcrumbFor(pathname: string): Crumb[] {
 
   return paths.map((href) => ({ href, label: titleFor(href) }));
 }
+
+export function breadcrumbListFor(pathname: string, site: URL | undefined) {
+  const crumbs = breadcrumbFor(pathname);
+  return {
+    "@type": "BreadcrumbList",
+    "@id": `${new URL(pathname, site).href}#breadcrumb`,
+    itemListElement: crumbs.map((crumb, i) => ({
+      "@type": "ListItem",
+      item: new URL(crumb.href, site).href,
+      position: i + 1,
+      name: crumb.label,
+    })),
+  };
+}
