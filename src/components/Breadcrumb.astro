@@ -1,0 +1,24 @@
+---
+import { breadcrumbFor } from "../utils/routes";
+
+const pathname = Astro.url.pathname;
+
+const crumbs = breadcrumbFor(pathname);
+---
+
+<nav aria-label="breadcrumb">
+  <ol>
+    {
+      crumbs.map((crumb) => (
+        <li>
+          <a
+            href={crumb.href}
+            aria-current={pathname === crumb.href ? "page" : undefined}
+          >
+            {crumb.label}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

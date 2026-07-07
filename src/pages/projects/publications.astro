@@ -1,0 +1,311 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Title from "../../components/Title.astro";
+import { titleFor } from "../../utils/routes";
+import {
+  authorRef,
+  authorNodes,
+  authorInfo,
+  type AuthorKey,
+} from "../../utils/authors";
+
+interface PublishedVersion {
+  venue: string;
+  venueType: "journal" | "conference";
+  date: string;
+  doi?: string;
+  url?: string;
+  issn?: string;
+  isbn?: string;
+  volume?: string;
+  issue?: string;
+  pageStart?: string;
+  pageEnd?: string;
+  pagination?: string;
+  publisher?: string;
+  copyrightHolder?: AuthorKey[] | "publisher";
+  license?: string;
+  isAccessibleForFree?: boolean;
+}
+
+interface Preprint {
+  url: string;
+  date?: string;
+  doi?: string;
+  license?: string;
+}
+
+interface Funding {
+  funder: string;
+  funderUrl?: string;
+  grantId: string;
+  name?: string;
+}
+
+interface Publication {
+  slug: string;
+  title: string;
+  authors: AuthorKey[];
+  abstract?: string;
+  inLanguage?: string;
+  funding?: Funding[];
+  published?: PublishedVersion;
+  preprint?: Preprint;
+}
+
+const publications: Publication[] = [
+  {
+    slug: "mehrtens2026phase",
+    title:
+      "Phase Field Modeling of Aluminum Agglomeration in Solid Composite Propellants",
+    authors: ["mmehrtens", "brunnels"],
+    abstract:
+      "The agglomeration of aluminum (Al) nanopowder often causes efficiency losses during combustion and degradation of solid rocket motors during the burning of solid composite propellants (SCP). While physical experiments have provided valuable insights into Al agglomeration, the phenomenon is highly sensitive to propellant geometry and composition. As a result, numerical simulation provides a more versatile and systematic approach to exploring parameter spaces, particularly under conditions that are difficult, costly, or impractical to investigate experimentally. This work presents a computational model using phase field (PF) methods that simulates Al nanopowder agglomeration in an ammonium perchlorate/hydroxyl-terminated polybutadiene (AP/HTPB) SCP. The model is implemented in Alamo, an open-source, in-house multiphysics solver for PF simulations with block-structured adaptive mesh refinement (BSAMR). By running the model on a set of 100 packed-sphere microstructures with varying AP weight percentages (wt%) and particle sizes, the model’s ability to capture the complex physics of agglomeration at the mesoscale is determined. Simulation results generally reflect the trends predicted by the pocket model, showing that Al agglomeration is more likely to occur in SCP formulations with lower AP loadings or with coarser AP particles.",
+    inLanguage: "en-US",
+    funding: [
+      {
+        funder: "Office of Naval Research",
+        funderUrl: "https://www.onr.navy.mil",
+        grantId: "N00014-25-1-2029",
+      },
+    ],
+    published: {
+      venue: "AIAA SCITECH 2026 Forum",
+      venueType: "conference",
+      date: "2026-01-08",
+      doi: "10.2514/6.2026-1271",
+      url: "https://arc.aiaa.org/doi/abs/10.2514/6.2026-1271",
+      isbn: "978-1-62410-765-8",
+      pagination: "2026-1271",
+      publisher: "American Institute of Aeronautics and Astronautics",
+      copyrightHolder: ["mmehrtens", "brunnels"],
+      isAccessibleForFree: false,
+    },
+    preprint: {
+      url: "https://files.mehrtens.com/preprints/mehrtens2026phase-v1.pdf",
+      date: "2025-12-09",
+      license: "https://creativecommons.org/licenses/by/4.0/",
+    },
+  },
+];
+
+const pathname = Astro.url.pathname;
+const site = Astro.site;
+const pageUrl = new URL(pathname, site).href;
+const title = titleFor(pathname);
+
+const doiUrl = (doi?: string) => (doi ? `https://doi.org/${doi}` : undefined);
+const officialUrl = (p: PublishedVersion) => doiUrl(p.doi) ?? p.url;
+
+const fmtDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+
+const workId = (slug: string) => `${pageUrl}#${slug}`;
+const publishedId = (slug: string) => `${pageUrl}#${slug}-published`;
+const preprintId = (slug: string) => `${pageUrl}#${slug}-preprint`;
+const orgNode = (name: string) => ({ "@type": "Organization", name });
+
+function fundingNode(f: Funding) {
+  return {
+    "@type": "Grant",
+    funder: {
+      "@type": "GovernmentOrganization",
+      name: f.funder,
+      url: f.funderUrl,
+    },
+    identifier: f.grantId,
+    name: f.name,
+  };
+}
+
+function venueNode(p: PublishedVersion) {
+  if (p.venueType === "journal") {
+    const periodical = { "@type": "Periodical", issn: p.issn, name: p.venue };
+    const volume = p.volume
+      ? {
+          "@type": "PublicationVolume",
+          volumeNumber: p.volume,
+          isPartOf: periodical,
+        }
+      : periodical;
+    return p.issue
+      ? { "@type": "PublicationIssue", issueNumber: p.issue, isPartOf: volume }
+      : volume;
+  }
+  return { "@type": "Book", isbn: p.isbn, name: p.venue };
+}
+
+function copyrightHolderValue(p: PublishedVersion) {
+  if (!p.copyrightHolder) return undefined;
+  if (p.copyrightHolder === "publisher") {
+    return p.publisher ? orgNode(p.publisher) : undefined;
+  }
+  return p.copyrightHolder.map((k) => authorRef(k, site));
+}
+
+function workNode(pub: Publication) {
+  const workExample: { "@id": string }[] = [];
+  if (pub.published) workExample.push({ "@id": publishedId(pub.slug) });
+  if (pub.preprint) workExample.push({ "@id": preprintId(pub.slug) });
+  return {
+    "@type": "ScholarlyArticle",
+    "@id": workId(pub.slug),
+    abstract: pub.abstract,
+    author: pub.authors.map((k) => authorRef(k, site)),
+    funding: pub.funding?.map(fundingNode),
+    inLanguage: pub.inLanguage ?? "en",
+    workExample,
+    name: pub.title,
+  };
+}
+
+function publishedNode(pub: Publication, p: PublishedVersion) {
+  return {
+    "@type": "ScholarlyArticle",
+    "@id": publishedId(pub.slug),
+    pageEnd: p.pageEnd,
+    pageStart: p.pageStart,
+    pagination: p.pagination,
+    author: pub.authors.map((k) => authorRef(k, site)),
+    copyrightHolder: copyrightHolderValue(p),
+    datePublished: p.date,
+    exampleOfWork: { "@id": workId(pub.slug) },
+    isAccessibleForFree: p.isAccessibleForFree,
+    isPartOf: venueNode(p),
+    license: p.license,
+    publisher: p.publisher ? orgNode(p.publisher) : undefined,
+    name: pub.title,
+    sameAs: doiUrl(p.doi),
+    url: officialUrl(p),
+  };
+}
+
+function preprintNode(pub: Publication, pr: Preprint) {
+  const author = pub.authors.map((k) => authorRef(k, site));
+  return {
+    "@type": "ScholarlyArticle",
+    "@id": preprintId(pub.slug),
+    author,
+    copyrightHolder: author,
+    datePublished: pr.date,
+    encoding: pr.url
+      ? {
+          "@type": "MediaObject",
+          contentUrl: pr.url,
+          encodingFormat: "application/pdf",
+        }
+      : undefined,
+    exampleOfWork: { "@id": workId(pub.slug) },
+    isAccessibleForFree: true,
+    license: pr.license,
+    name: pub.title,
+    sameAs: doiUrl(pr.doi),
+  };
+}
+
+const sortDate = (pub: Publication) =>
+  pub.published?.date ?? pub.preprint?.date ?? "";
+const ordered = [...publications].sort((a, b) =>
+  sortDate(b).localeCompare(sortDate(a)),
+);
+
+const graph: Record<string, unknown>[] = [
+  {
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#webpage`,
+    breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+    author: { "@id": `${site}#person` },
+    isPartOf: { "@id": `${site}#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: ordered.map((pub, i) => ({
+        "@type": "ListItem",
+        item: { "@id": workId(pub.slug) },
+        position: i + 1,
+      })),
+    },
+    name: title,
+    url: pageUrl,
+  },
+  ...ordered.flatMap((pub) => {
+    const nodes: Record<string, unknown>[] = [workNode(pub)];
+    if (pub.published) nodes.push(publishedNode(pub, pub.published));
+    if (pub.preprint) nodes.push(preprintNode(pub, pub.preprint));
+    return nodes;
+  }),
+  ...authorNodes(
+    publications.flatMap((p) => p.authors),
+    site,
+  ),
+];
+---
+
+<BaseLayout graph={graph}>
+  <Title />
+  <p>
+    My academic publications. Where licensing allows, a free-access preprint is
+    linked alongside the published version.
+  </p>
+  <ol>
+    {
+      ordered.map((pub) => {
+        const oUrl = pub.published ? officialUrl(pub.published) : undefined;
+        const preUrl = pub.preprint?.url || undefined;
+        return (
+          <li>
+            <article>
+              <h2>
+                <cite>{pub.title}</cite>
+              </h2>
+              <ol aria-label="authors">
+                {pub.authors.map((key) => {
+                  const a = authorInfo(key);
+                  const profile = a.sameAs?.[0];
+                  return (
+                    <li>
+                      {a.self ? (
+                        <strong>{a.name}</strong>
+                      ) : profile ? (
+                        <a href={profile}>{a.name}</a>
+                      ) : (
+                        a.name
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+              {pub.published && (
+                <p>
+                  <cite>{pub.published.venue}</cite>,{" "}
+                  <time datetime={pub.published.date}>
+                    {fmtDate(pub.published.date)}
+                  </time>
+                </p>
+              )}
+              {pub.abstract && (
+                <details>
+                  <summary>Abstract</summary>
+                  <blockquote cite={oUrl}>
+                    <p>{pub.abstract}</p>
+                  </blockquote>
+                </details>
+              )}
+              {(oUrl || preUrl) && (
+                <p>
+                  {oUrl && <a href={oUrl}>Published version</a>}
+                  {oUrl && preUrl && " · "}
+                  {preUrl && <a href={preUrl}>Preprint (PDF)</a>}
+                </p>
+              )}
+            </article>
+          </li>
+        );
+      })
+    }
+  </ol>
+</BaseLayout>

@@ -1,10 +1,17 @@
 ---
+import Breadcrumb from "../components/Breadcrumb.astro";
 import Nav from "../components/Nav.astro";
 import { copyrightYears } from "../utils/copyright";
+import {
+  titleFor,
+  tabTitleFor,
+  descriptionFor,
+  breadcrumbFor,
+  breadcrumbListFor,
+} from "../utils/routes";
+import { personNode, orgNode } from "../utils/authors";
 
 interface Props {
-  title: string;
-  description: string;
   graph?: Record<string, unknown>[];
   og?: {
     type?: "website" | "article" | "profile";
@@ -24,7 +31,7 @@ interface Props {
     };
   };
 }
-const { title, description, graph = [], og = {} } = Astro.props;
+const { graph = [], og = {} } = Astro.props;
 
 const ogType = og.type ?? "website";
 const ogExtras: { property: string; content: string }[] = [];
@@ -55,6 +62,15 @@ const pathname = Astro.url.pathname;
 const site = Astro.site;
 const canonicalURL = new URL(pathname, site).href;
 
+const title = titleFor(pathname);
+const tabTitle = tabTitleFor(pathname);
+const description = descriptionFor(pathname);
+
+const renderBreadcrumb = breadcrumbFor(pathname).length > 1;
+const breadcrumbGraph = renderBreadcrumb
+  ? [breadcrumbListFor(pathname, site)]
+  : [];
+
 const publishedDate = "2026-07-02";
 const publishedYear = 2026;
 
@@ -63,149 +79,8 @@ const years = copyrightYears(publishedYear);
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Person",
-      "@id": `${site}#person`,
-      affiliation: { "@id": "https://www.iastate.edu/#org" },
-      alumniOf: { "@id": "https://www.iastate.edu/#org" },
-      award:
-        "Department of War (DoW) National Defense Science and Engineering Graduate (NDSEG) Fellowship",
-      email: "matthew@mehrtens.com",
-      familyName: "Mehrtens",
-      funding: {
-        "@type": "Grant",
-        funder: {
-          "@type": "GovernmentOrganization",
-          name: "U.S. Department of War (DoW)",
-        },
-        description:
-          "A competitive fellowship that is awarded to U.S. citizens, U.S. nationals, and U.S. dual citizens who intend to pursue a Doctoral degree aligned to the DoD services Broad Agency Announcements (BAAs) in research and development at a U.S. institution of their choice.",
-        name: "National Defense Science and Engineering Graduate (NDSEG) Fellowship",
-        url: "https://ndseg.sysplus.com",
-      },
-      gender: "https://schema.org/Male",
-      givenName: "Matthew",
-      hasCredential: {
-        "@type": "EducationalOccupationalCredential",
-        educationalLevel: "Undergraduate",
-        credentialCategory: "Bachelor's Degree",
-        recognizedBy: { "@id": "https://www.iastate.edu/#org" },
-        name: "Bachelor of Science in Aerospace Engineering",
-      },
-      height: {
-        "@type": "QuantitativeValue",
-        unitCode: "FOT",
-        value: 6,
-      },
-      honorificPrefix: "Mr.",
-      jobTitle: "Computational Physics Student Summer Workshop Fellow",
-      knowsLanguage: {
-        "@type": "Language",
-        alternateName: "en",
-        name: "English",
-      },
-      memberOf: {
-        "@type": "OrganizationRole",
-        roleName: "President",
-        memberOf: {
-          "@type": "Organization",
-          name: "Tau Beta Pi Iowa Alpha Chapter",
-          url: "https://iowaalpha.tbp.org",
-          parentOrganization: {
-            "@type": "Organization",
-            name: "Tau Beta Pi",
-            url: "https://www.tbp.org",
-          },
-        },
-      },
-      nationality: {
-        "@type": "Country",
-        name: "United States",
-      },
-      pronouns: "he/him",
-      worksFor: [
-        {
-          "@type": "OrganizationRole",
-          endDate: "2026-08",
-          roleName: "Computational Physics Student Summer Workshop Fellow",
-          startDate: "2026-06",
-          worksFor: {
-            "@type": "ResearchOrganization",
-            name: "Los Alamos National Laboratory",
-            url: "https://www.lanl.gov",
-          },
-        },
-        {
-          "@type": "OrganizationRole",
-          endDate: "2026-05",
-          roleName: "Research Assistant",
-          startDate: "2025-01",
-          worksFor: { "@id": "https://www.iastate.edu/#org" },
-        },
-        {
-          "@type": "OrganizationRole",
-          endDate: "2025-12",
-          roleName: "Teaching Assistant (AERE 4210 Advanced Flight Structures)",
-          startDate: "2025-08",
-          worksFor: { "@id": "https://www.iastate.edu/#org" },
-        },
-        {
-          "@type": "OrganizationRole",
-          endDate: "2024-12",
-          roleName: "System & Software Engineering Intern",
-          startDate: "2022-05",
-          worksFor: {
-            "@type": "Organization",
-            name: "Collins Aerospace",
-            url: "https://www.collinsaerospace.com",
-          },
-        },
-        {
-          "@type": "OrganizationRole",
-          endDate: "2022-05",
-          roleName: "Accounting Technical Intern",
-          startDate: "2020-12",
-          worksFor: { "@id": "https://www.iastate.edu/#org" },
-        },
-        {
-          "@type": "OrganizationRole",
-          endDate: "2021-08",
-          roleName: "Assistant Manager",
-          startDate: "2018-06",
-          worksFor: {
-            "@type": "Organization",
-            name: "Cinemark Movies 12",
-            url: "https://www.cinemark.com",
-          },
-        },
-        {
-          "@type": "OrganizationRole",
-          endDate: "2017-08",
-          roleName: "Seasonal Pollinator",
-          startDate: "2016-06",
-          worksFor: {
-            "@type": "Organization",
-            name: "Dow AgroSciences",
-          },
-        },
-      ],
-      description:
-        "Ph.D. student in engineering mechanics at Iowa State University researching the topological optimization of solid composite propellants.",
-      name: "Matthew Mehrtens",
-      sameAs: [
-        "https://orcid.org/0009-0002-6996-656X",
-        "https://github.com/mcmehrtens",
-        "https://scholar.google.com/citations?user=jOi0_hYAAAAJ",
-        "https://music.apple.com/profile/mcmehrtens",
-      ],
-      url: `${site}`,
-    },
-    {
-      "@type": "CollegeOrUniversity",
-      "@id": "https://www.iastate.edu/#org",
-      name: "Iowa State University",
-      url: "https://www.iastate.edu",
-    },
+    personNode(site),
+    orgNode,
     {
       "@type": "WebSite",
       "@id": `${site}#website`,
@@ -221,6 +96,7 @@ const structuredData = {
       name: "mehrtens.com",
       url: `${site}`,
     },
+    ...breadcrumbGraph,
     ...graph,
   ],
 };
@@ -238,7 +114,7 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{tabTitle}</title>
     <meta name="author" content="Matthew Mehrtens" />
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
@@ -249,7 +125,7 @@ const structuredData = {
     <meta property="og:site_name" content="mehrtens.com" />
     {ogExtras.map((m) => <meta property={m.property} content={m.content} />)}
     {
-      /* When og:image ships, switch to "summary_large_image" (needs a 1200×630 image). */
+      /* when og:image ships, switch to "summary_large_image" (needs a 1200×630 image). */
     }
     <meta name="twitter:card" content="summary" />
     <script
@@ -267,15 +143,16 @@ const structuredData = {
       <Nav
         ariaLabel="primary"
         navLinks={[
-          { href: "/", label: "About Me" },
-          { href: "/blog", label: "Blog" },
-          { href: "/projects", label: "Projects" },
-          { href: "/contact", label: "Contact" },
+          { href: "/", label: titleFor("/") },
+          { href: "/blog", label: titleFor("/blog") },
+          { href: "/projects", label: titleFor("/projects") },
+          { href: "/contact", label: titleFor("/contact") },
         ]}
       />
     </header>
 
     <main id="main" tabindex="-1">
+      {renderBreadcrumb && <Breadcrumb />}
       <slot />
     </main>
 
@@ -285,7 +162,7 @@ const structuredData = {
           <a href="/">mehrtens.com</a> © {years} by <a href="/"
             >Matthew Mehrtens</a
           > under <a href="https://creativecommons.org/licenses/by/4.0/"
-            >CC BY 4.0</a
+            ><abbr>CC</abbr> BY 4.0</a
           >
         </small>
       </p>
