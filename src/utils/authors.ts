@@ -21,22 +21,22 @@ const authors = {
 
 export type AuthorKey = keyof typeof authors;
 
-function meta(key: AuthorKey): AuthorMeta {
+export function authorInfo(key: AuthorKey): AuthorMeta {
   return authors[key];
 }
 
 export function authorRef(key: AuthorKey, site: URL | undefined) {
-  return { "@id": meta(key).self ? `${site}#person` : `${site}#${key}` };
+  return { "@id": authorInfo(key).self ? `${site}#person` : `${site}#${key}` };
 }
 
 export function authorNodes(keys: AuthorKey[], site: URL | undefined) {
   return [...new Set(keys)]
-    .filter((key) => !meta(key).self)
+    .filter((key) => !authorInfo(key).self)
     .map((key) => ({
       "@type": "Person",
       "@id": `${site}#${key}`,
-      name: meta(key).name,
-      sameAs: meta(key).sameAs,
+      name: authorInfo(key).name,
+      sameAs: authorInfo(key).sameAs,
     }));
 }
 
