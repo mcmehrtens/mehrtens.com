@@ -299,7 +299,11 @@ const graph: Record<string, unknown>[] = [
                 <p>
                   {oUrl && <a href={oUrl}>Published version</a>}
                   {oUrl && preUrl && " · "}
-                  {preUrl && <a href={preUrl}>Preprint (PDF)</a>}
+                  {preUrl && (
+                    <a href={preUrl}>
+                      Preprint (<abbr>PDF</abbr>)
+                    </a>
+                  )}
                 </p>
               )}
             </article>
