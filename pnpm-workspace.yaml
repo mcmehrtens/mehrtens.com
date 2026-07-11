@@ -3,6 +3,9 @@ allowBuilds:
   sharp: true
   workerd: true
 minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - astro
+  - "@astrojs/*"
 # Force patched versions of vulnerable transitive deps (pulled in by astro /
 # @astrojs/check / @lhci/cli). The selector syntax only rewrites the vulnerable
 # range, so already-safe copies (e.g. yaml@2.9.0) are left untouched.
