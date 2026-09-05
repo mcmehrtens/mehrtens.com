@@ -35,26 +35,26 @@
     "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.12.1",
+    "@axe-core/playwright": "4.13.0",
     "@eslint/css": "1.4.0",
     "@eslint/js": "10.0.1",
     "@eslint/json": "2.0.1",
     "@eslint/markdown": "8.0.3",
     "@lhci/cli": "0.15.1",
-    "@playwright/test": "1.61.1",
-    "@types/node": "26.1.1",
-    "eslint": "10.7.0",
+    "@playwright/test": "1.62.1",
+    "@types/node": "26.4.0",
+    "eslint": "10.9.1",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-astro": "2.1.1",
+    "eslint-plugin-astro": "3.1.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
-    "globals": "17.7.0",
+    "globals": "17.11.0",
     "husky": "9.1.7",
-    "linkinator": "7.6.1",
-    "lint-staged": "17.0.8",
-    "prettier": "3.9.5",
+    "linkinator": "8.1.0",
+    "lint-staged": "17.4.1",
+    "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1",
-    "start-server-and-test": "3.0.11",
-    "typescript-eslint": "8.63.0",
-    "wrangler": "4.110.0"
+    "start-server-and-test": "3.0.12",
+    "typescript-eslint": "8.68.0",
+    "wrangler": "4.127.1"
   }
 }
