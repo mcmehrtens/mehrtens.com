@@ -12,9 +12,9 @@ Policy: https://github.com/mcmehrtens/mehrtens.com/blob/main/SECURITY.md
 Preferred-Languages: en
 -----BEGIN PGP SIGNATURE-----
 
-iJEEARYKADkWIQQR9ifDi7W2ogJQ8YXhiogD11Tq3gUCakF/kRsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwwLDMACgkQ4YqIA9dU6t5JZAD+JKQ/aAzyNF1RismKltXG
-RMSShtDzjSmoMDBqMreqUQ8A/1ZxqtCtRAsvUKgX5vlBgCoB0jtrhEABRXm/ZgoS
-0goD
-=OONU
+iJEEARYKADkWIQTYZ5lPQq3SQz4RpFnaf8cCQWKdvQUCavTQ3BsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMiwwLDMACgkQ2n/HAkFinb0h9wD/XZpwI00MPI787pfJuhrT
+nJmngXOfnFCinnPzvvUla7kA/AiT5HLU6tuxjTzKbk/fOe6UFfhU35XSkhruM49S
+cAcN
+=S8jA
 -----END PGP SIGNATURE-----
