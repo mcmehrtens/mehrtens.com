@@ -25,6 +25,7 @@
     "lighthouse:mobile": "LH_PROFILE=mobile lhci autorun --config=./lighthouserc.cjs",
     "lighthouse:desktop": "LH_PROFILE=desktop lhci autorun --config=./lighthouserc.cjs",
     "lighthouse:low-end": "LH_PROFILE=low-end lhci autorun --config=./lighthouserc.cjs",
+    "lighthouse:ci": "start-server-and-test \"astro preview --host 127.0.0.1 --port 4321\" http-get://127.0.0.1:4321 \"lhci autorun --config=./lighthouserc.cjs\"",
     "lighthouse": "start-server-and-test \"astro preview --host 127.0.0.1 --port 4321\" http-get://127.0.0.1:4321 \"pnpm run lighthouse:mobile && pnpm run lighthouse:desktop && pnpm run lighthouse:low-end\"",
     "prepare": "husky"
   },
