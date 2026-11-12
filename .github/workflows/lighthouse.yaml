@@ -17,10 +17,12 @@ permissions:
 
 jobs:
   lighthouse:
-    name: Performance, SEO, best practices
+    name: Lighthouse (${{ matrix.profile }})
     runs-on: ubuntu-latest
-    outputs:
-      has_regression: ${{ steps.summary.outputs.has_regression }}
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [mobile, desktop, low-end]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -42,8 +44,41 @@ jobs:
         run: pnpm run build
 
       - name: Lighthouse CI
-        run: pnpm run lighthouse
+        run: pnpm run lighthouse:ci
         continue-on-error: true
+        env:
+          LH_PROFILE: ${{ matrix.profile }}
+
+      - name: Upload Lighthouse reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: lighthouse-reports-${{ matrix.profile }}
+          path: lighthouse-reports/
+          retention-days: 30
+
+  summary:
+    name: Performance, SEO, best practices
+    needs: lighthouse
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    outputs:
+      has_regression: ${{ steps.summary.outputs.has_regression }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+
+      - name: Download Lighthouse reports
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: lighthouse-reports-*
+          path: lighthouse-reports
+          merge-multiple: true
 
       - name: Score summary
         id: summary
@@ -63,17 +98,9 @@ jobs:
             lighthouse-badges.json
           if-no-files-found: error
 
-      - name: Upload Lighthouse reports
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: lighthouse-reports
-          path: lighthouse-reports/
-          retention-days: 30
-
   report:
     name: Publish results
-    needs: lighthouse
+    needs: summary
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     permissions:
@@ -96,7 +123,7 @@ jobs:
       - name: Open issue on scheduled regression
         if:
           ${{ github.event_name == 'schedule' &&
-          needs.lighthouse.outputs.has_regression == 'true' }}
+          needs.summary.outputs.has_regression == 'true' }}
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
