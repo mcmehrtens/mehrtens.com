@@ -41,63 +41,70 @@ const og = {
     <header>
       <Title />
       <p>
-        Published: <time datetime={firstPublished}
-          >{
-            new Date(firstPublished).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }</time
-        >
+        Published:{" "}
+        <time datetime={firstPublished}>
+          {new Date(firstPublished).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          })}
+        </time>
       </p>
       <p>
-        Last updated: <time datetime={lastUpdated}
-          >{
-            new Date(lastUpdated).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }</time
-        >
+        Last updated:{" "}
+        <time datetime={lastUpdated}>
+          {new Date(lastUpdated).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          })}
+        </time>
       </p>
     </header>
     <p>
-      I’m a Ph.D. student at Iowa State University (<abbr>ISU</abbr>) studying <a
-        href="https://www.grad-college.iastate.edu/programs/engineering_mechanics"
-        >engineering mechanics</a
-      >, with a focus on <a
-        href="https://en.wikipedia.org/wiki/Continuum_mechanics"
-        >solid continuum mechanics</a
-      > and <a href="https://en.wikipedia.org/wiki/Fluid_dynamics"
-        >fluid dynamics</a
-      >. My research is on the topological optimization of <a
-        href="https://en.wikipedia.org/wiki/Solid-propellant_rocket"
-        >solid composite propellants (<abbr>SCP</abbr>)</a
-      >, work supported by the <a href="https://ndseg.sysplus.com/NDSEG/about/"
-        >National Defense Science and Engineering Graduate (<abbr>NDSEG</abbr>)
-        Fellowship</a
-      > awarded to me in spring 2026. I received my B.S. in aerospace engineering
-      from Iowa State in May 2025, during which I spent two and a half years as a
-      systems and software engineering intern at <a
-        href="https://www.rtx.com/collinsaerospace">Collins Aerospace</a
-      >. I’m currently a fellow in the <a
-        href="https://www.lanl.gov/engage/organizations/xcp/computational-physics-student-summer-workshop"
-        >2026 Computational Physics Student Summer Workshop</a
-      > at <a href="https://www.lanl.gov"
-        >Los Alamos National Laboratory (<abbr>LANL</abbr>)</a
-      >.
+      I’m a Ph.D. student at Iowa State University (<abbr>ISU</abbr>) studying{" "}
+      <a href="https://www.grad-college.iastate.edu/programs/engineering_mechanics">
+        engineering mechanics
+      </a>
+      , with a focus on{" "}
+      <a href="https://en.wikipedia.org/wiki/Continuum_mechanics">
+        solid continuum mechanics
+      </a>{" "}
+      and{" "}
+      <a href="https://en.wikipedia.org/wiki/Fluid_dynamics">fluid dynamics</a>.
+      My research is on the topological optimization of{" "}
+      <a href="https://en.wikipedia.org/wiki/Solid-propellant_rocket">
+        solid composite propellants (<abbr>SCP</abbr>)
+      </a>
+      , work supported by the{" "}
+      <a href="https://ndseg.sysplus.com/NDSEG/about/">
+        National Defense Science and Engineering Graduate (<abbr>NDSEG</abbr>)
+        Fellowship
+      </a>{" "}
+      awarded to me in spring 2026. I received my B.S. in aerospace engineering
+      from Iowa State in May 2025, during which I spent two and a half years as
+      a systems and software engineering intern at{" "}
+      <a href="https://www.rtx.com/collinsaerospace">Collins Aerospace</a>. I’m
+      currently a fellow in the{" "}
+      <a href="https://www.lanl.gov/engage/organizations/xcp/computational-physics-student-summer-workshop">
+        2026 Computational Physics Student Summer Workshop
+      </a>{" "}
+      at{" "}
+      <a href="https://www.lanl.gov">
+        Los Alamos National Laboratory (<abbr>LANL</abbr>)
+      </a>
+      .
     </p>
     <p>
       Although my education and experience is deeply intertwined with aerospace
       and national defense, my passion is for computers and consumer technology.
-      I’m deeply fascinated by topics such as compilers, networking, <a
-        href="https://en.wikipedia.org/wiki/Internet_of_things"
-        >Internet of Things (<abbr>IoT</abbr>)</a
-      >, and programming language design. I’m drawn to consumer technology
+      I’m deeply fascinated by topics such as compilers, networking,{" "}
+      <a href="https://en.wikipedia.org/wiki/Internet_of_things">
+        Internet of Things (<abbr>IoT</abbr>)
+      </a>
+      , and programming language design. I’m drawn to consumer technology
       because of the fundamental constraints associated with the design and
       engineering of consumer products—and by the (perhaps naïve) aspiration
       that improving a product—even marginally—has the potential to directly
@@ -105,10 +112,11 @@ const og = {
       depending on the size of the market.
     </p>
     <p>
-      Outside of tech and programming, I find my happy place listening to <a
-        href="https://music.apple.com/profile/mcmehrtens"
-        rel="me">music</a
-      >, watching movies, listening to podcasts, drinking coffee, and spending
+      Outside of tech and programming, I find my happy place listening to{" "}
+      <a href="https://music.apple.com/profile/mcmehrtens" rel="me">
+        music
+      </a>
+      , watching movies, listening to podcasts, drinking coffee, and spending
       quality time with my close friends. My goals in life are to leave a
       positive, lasting impact on the world, either through my interactions with
       the people I meet or the work I do in my career, and to learn everything

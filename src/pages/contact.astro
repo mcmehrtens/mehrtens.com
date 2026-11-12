@@ -55,15 +55,14 @@ const graph = [
   <Title />
   <p>
     The best way to reach me is email. I’ll usually reply within a few days. If
-    your message is sensitive, you can <a href="#encrypted-email">encrypt it</a
-    >. I’m also on Signal and Discord, but email is what I check most reliably.
+    your message is sensitive, you can <a href="#encrypted-email">encrypt it</a>
+    . I’m also on Signal and Discord, but email is what I check most reliably.
   </p>
 
   <h2>Email</h2>
   <p>
-    For anything general—questions, ideas, or just to say hello—write to <a
-      href={`mailto:${email.general}`}>{email.general}</a
-    >.
+    For anything general—questions, ideas, or just to say hello—write to{" "}
+    <a href={`mailto:${email.general}`}>{email.general}</a>.
   </p>
   <p>
     I also keep a few purpose-specific addresses. They all go to the same inbox,
@@ -71,55 +70,57 @@ const graph = [
   </p>
   <ul>
     <li>
-      <a href={`mailto:${email.security}`}>{email.security}</a> - security vulnerabilities
-      and disclosures. See my <a href={securityPolicyUrl}>security policy</a> and{
-        " "
-      }
+      <a href={`mailto:${email.security}`}>{email.security}</a> - security
+      vulnerabilities and disclosures. See my{" "}
+      <a href={securityPolicyUrl}>security policy</a> and{" "}
       <a href={securityTxtUrl}>security.txt</a> for scope.
     </li>
     <li>
-      <a href={`mailto:${email.privacy}`}>{email.privacy}</a> - questions or requests
-      about privacy and your data, as described in my <a href="/privacy"
-        >privacy policy</a
-      >.
+      <a href={`mailto:${email.privacy}`}>{email.privacy}</a> - questions or
+      requests about privacy and your data, as described in my{" "}
+      <a href="/privacy">privacy policy</a>.
     </li>
     <li>
-      <a href={`mailto:${email.legal}`}>{email.legal}</a> - legal notices, licensing,
-      and anything covered by my <a href="/terms">terms of service</a>.
+      <a href={`mailto:${email.legal}`}>{email.legal}</a> - legal notices,
+      licensing, and anything covered by my{" "}
+      <a href="/terms">terms of service</a>.
     </li>
   </ul>
 
-  <h2 id="encrypted-email">Encrypted email (<abbr>PGP</abbr>)</h2>
+  <h2 id="encrypted-email">
+    Encrypted email (<abbr>PGP</abbr>)
+  </h2>
   <p>
-    If you’d like to send me encrypted email, I publish an <a
-      href="https://www.openpgp.org/about/">OpenPGP</a
-    > key. Its fingerprint is:
+    If you’d like to send me encrypted email, I publish an{" "}
+    <a href="https://www.openpgp.org/about/">OpenPGP</a> key. Its fingerprint
+    is:
   </p>
-  <p><code>{pgpFingerprint}</code></p>
   <p>
-    You can download it directly from <a href={pgpKeyUrl}
-      >/.well-known/pgp-key.txt</a
-    >, or let your mail client fetch it automatically over <a
-      href="https://wiki.gnupg.org/WKD">Web Key Directory (<abbr>WKD</abbr>)</a
-    >:
+    <code>{pgpFingerprint}</code>
+  </p>
+  <p>
+    You can download it directly from{" "}
+    <a href={pgpKeyUrl}>/.well-known/pgp-key.txt</a>, or let your mail client
+    fetch it automatically over{" "}
+    <a href="https://wiki.gnupg.org/WKD">
+      Web Key Directory (<abbr>WKD</abbr>)
+    </a>
+    :
   </p>
   <pre><code>gpg --locate-keys {email.general}</code></pre>
   <p>
-    The same key also covers <a href={`mailto:${email.security}`}
-      >{email.security}</a
-    >.
+    The same key also covers{" "}
+    <a href={`mailto:${email.security}`}>{email.security}</a>.
   </p>
 
   <h2>Other ways to reach me</h2>
   <p>Email is the most reliable, but I’m also on:</p>
   <ul>
     <li>
-      <b>Signal:</b>{" "}
-      <a href={signalUrl}>message me on Signal</a>
+      <b>Signal:</b> <a href={signalUrl}>message me on Signal</a>
     </li>
     <li>
-      <b>Discord:</b>{" "}
-      {discordUsername}
+      <b>Discord:</b> {discordUsername}
     </li>
   </ul>
 </BaseLayout>
