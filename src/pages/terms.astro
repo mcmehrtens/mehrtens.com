@@ -55,78 +55,85 @@ const og = {
     <header>
       <Title />
       <p>
-        Published: <time datetime={firstPublished}
-          >{
-            new Date(firstPublished).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }</time
-        >
+        Published:{" "}
+        <time datetime={firstPublished}>
+          {new Date(firstPublished).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          })}
+        </time>
       </p>
       <p>
-        Last updated: <time datetime={latest.date}
-          >{
-            new Date(latest.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }</time
-        >
+        Last updated:{" "}
+        <time datetime={latest.date}>
+          {new Date(latest.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          })}
+        </time>
       </p>
     </header>
     <p>
-      <b>Summary:</b> This is my personal website—a place for my writing, projects,
-      and background. You’re welcome to read it, link to it, and share it. The writing,
-      images, and code here are openly licensed—you may reuse and build on them, even
-      commercially, as long as you credit me. I publish everything in good faith but
-      provide it “as is,” the views are my own, nothing here is professional advice,
-      and I can’t be held liable if you rely on something and it doesn’t work out.
-      Beyond that, just use the site lawfully and don’t try to break it.
+      <b>Summary:</b> This is my personal website—a place for my writing,
+      projects, and background. You’re welcome to read it, link to it, and share
+      it. The writing, images, and code here are openly licensed—you may reuse
+      and build on them, even commercially, as long as you credit me. I publish
+      everything in good faith but provide it “as is,” the views are my own,
+      nothing here is professional advice, and I can’t be held liable if you
+      rely on something and it doesn’t work out. Beyond that, just use the site
+      lawfully and don’t try to break it.
     </p>
 
     <h2>Agreement to these terms</h2>
     <p>
-      By visiting and using <a href="/">mehrtens.com</a> (the “site”), you agree to
-      these Terms of Service. If you don’t agree with them, please don’t use the site.
-      These terms apply to everyone who accesses the site.
+      By visiting and using <a href="/">mehrtens.com</a> (the “site”), you agree
+      to these Terms of Service. If you don’t agree with them, please don’t use
+      the site. These terms apply to everyone who accesses the site.
     </p>
 
     <h2>Who runs this site</h2>
     <p>
-      This website <a href="/">mehrtens.com</a> is operated by Matthew Mehrtens as
-      a personal, non-commercial project. There are no accounts, comments, purchases,
-      or contact forms—it’s simply a place to read what I publish. If you have any
-      questions about these terms, you can reach me at <a
-        href="mailto:legal@mehrtens.com">legal@mehrtens.com</a
-      >.
+      This website <a href="/">mehrtens.com</a> is operated by Matthew Mehrtens
+      as a personal, non-commercial project. There are no accounts, comments,
+      purchases, or contact forms—it’s simply a place to read what I publish. If
+      you have any questions about these terms, you can reach me at{" "}
+      <a href="mailto:legal@mehrtens.com">legal@mehrtens.com</a>.
     </p>
 
     <h2>Licensing and reuse</h2>
     <p>
       This site is openly licensed, and you’re encouraged to build on it. Two
-      licenses apply, both recorded in the repository’s <a
+      licenses apply, both recorded in the repository’s{" "}
+      <a
         href="https://github.com/mcmehrtens/mehrtens.com/blob/main/LICENSE"
-        rel="license">LICENSE</a
-      > file:
+        rel="license"
+      >
+        LICENSE
+      </a>{" "}
+      file:
     </p>
     <ul>
       <li>
-        The <b>source code</b> of this site is released under the <a
+        The <b>source code</b> of this site is released under the{" "}
+        <a
           href="https://github.com/mcmehrtens/mehrtens.com/blob/main/LICENSE"
-          rel="license">MIT License</a
-        >.
+          rel="license"
+        >
+          MIT License
+        </a>
+        .
       </li>
       <li>
         All other <b>content</b>—the text of my posts, images, and design—is
-        licensed under <a
-          href="https://creativecommons.org/licenses/by/4.0/"
-          rel="license">Creative Commons Attribution 4.0 International</a
-        > (CC BY 4.0).
+        licensed under{" "}
+        <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">
+          Creative Commons Attribution 4.0 International
+        </a>{" "}
+        (CC BY 4.0).
       </li>
     </ul>
     <p>
@@ -147,10 +154,11 @@ const og = {
       <li>
         attempt to breach or circumvent the site’s security measures, or test
         for vulnerabilities other than through good-faith research conducted in
-        accordance with my <a
-          href="https://github.com/mcmehrtens/mehrtens.com/blob/main/SECURITY.md"
-          >security policy</a
-        >;
+        accordance with my{" "}
+        <a href="https://github.com/mcmehrtens/mehrtens.com/blob/main/SECURITY.md">
+          security policy
+        </a>
+        ;
       </li>
       <li>
         interfere with or disrupt the site—for example, through excessive
@@ -215,9 +223,7 @@ const og = {
       after an update means you accept the revised terms.
     </p>
     <table>
-      <caption>
-        Changes that have been made to these terms of service.
-      </caption>
+      <caption>Changes that have been made to these terms of service.</caption>
       <thead>
         <tr>
           <th scope="col">Date</th>
@@ -225,16 +231,14 @@ const og = {
         </tr>
       </thead>
       <tbody>
-        {
-          ordered.map((a) => (
-            <tr>
-              <td>
-                <time datetime={a.date}>{a.date}</time>
-              </td>
-              <td>{a.change}</td>
-            </tr>
-          ))
-        }
+        {ordered.map((a) => (
+          <tr>
+            <td>
+              <time datetime={a.date}>{a.date}</time>
+            </td>
+            <td>{a.change}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </article>

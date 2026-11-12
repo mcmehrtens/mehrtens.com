@@ -8,17 +8,15 @@ const crumbs = breadcrumbFor(pathname);
 
 <nav aria-label="breadcrumb">
   <ol>
-    {
-      crumbs.map((crumb) => (
-        <li>
-          <a
-            href={crumb.href}
-            aria-current={pathname === crumb.href ? "page" : undefined}
-          >
-            {crumb.label}
-          </a>
-        </li>
-      ))
-    }
+    {crumbs.map((crumb) => (
+      <li>
+        <a
+          href={crumb.href}
+          aria-current={pathname === crumb.href ? "page" : undefined}
+        >
+          {crumb.label}
+        </a>
+      </li>
+    ))}
   </ol>
 </nav>

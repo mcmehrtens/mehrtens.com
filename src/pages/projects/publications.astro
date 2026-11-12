@@ -252,64 +252,62 @@ const graph: Record<string, unknown>[] = [
     linked alongside the published version.
   </p>
   <ol>
-    {
-      ordered.map((pub) => {
-        const oUrl = pub.published ? officialUrl(pub.published) : undefined;
-        const preUrl = pub.preprint?.url || undefined;
-        return (
-          <li>
-            <article>
-              <h2>
-                <cite>{pub.title}</cite>
-              </h2>
-              <ol aria-label="authors">
-                {pub.authors.map((key) => {
-                  const a = authorInfo(key);
-                  const profile = a.sameAs?.[0];
-                  return (
-                    <li>
-                      {a.self ? (
-                        <strong>{a.name}</strong>
-                      ) : profile ? (
-                        <a href={profile}>{a.name}</a>
-                      ) : (
-                        a.name
-                      )}
-                    </li>
-                  );
-                })}
-              </ol>
-              {pub.published && (
-                <p>
-                  <cite>{pub.published.venue}</cite>,{" "}
-                  <time datetime={pub.published.date}>
-                    {fmtDate(pub.published.date)}
-                  </time>
-                </p>
-              )}
-              {pub.abstract && (
-                <details>
-                  <summary>Abstract</summary>
-                  <blockquote cite={oUrl}>
-                    <p>{pub.abstract}</p>
-                  </blockquote>
-                </details>
-              )}
-              {(oUrl || preUrl) && (
-                <p>
-                  {oUrl && <a href={oUrl}>Published version</a>}
-                  {oUrl && preUrl && " · "}
-                  {preUrl && (
-                    <a href={preUrl}>
-                      Preprint (<abbr>PDF</abbr>)
-                    </a>
-                  )}
-                </p>
-              )}
-            </article>
-          </li>
-        );
-      })
-    }
+    {ordered.map((pub) => {
+      const oUrl = pub.published ? officialUrl(pub.published) : undefined;
+      const preUrl = pub.preprint?.url || undefined;
+      return (
+        <li>
+          <article>
+            <h2>
+              <cite>{pub.title}</cite>
+            </h2>
+            <ol aria-label="authors">
+              {pub.authors.map((key) => {
+                const a = authorInfo(key);
+                const profile = a.sameAs?.[0];
+                return (
+                  <li>
+                    {a.self ? (
+                      <strong>{a.name}</strong>
+                    ) : profile ? (
+                      <a href={profile}>{a.name}</a>
+                    ) : (
+                      a.name
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+            {pub.published && (
+              <p>
+                <cite>{pub.published.venue}</cite>,{" "}
+                <time datetime={pub.published.date}>
+                  {fmtDate(pub.published.date)}
+                </time>
+              </p>
+            )}
+            {pub.abstract && (
+              <details>
+                <summary>Abstract</summary>
+                <blockquote cite={oUrl}>
+                  <p>{pub.abstract}</p>
+                </blockquote>
+              </details>
+            )}
+            {(oUrl || preUrl) && (
+              <p>
+                {oUrl && <a href={oUrl}>Published version</a>}
+                {oUrl && preUrl && " · "}
+                {preUrl && (
+                  <a href={preUrl}>
+                    Preprint (<abbr>PDF</abbr>)
+                  </a>
+                )}
+              </p>
+            )}
+          </article>
+        </li>
+      );
+    })}
   </ol>
 </BaseLayout>

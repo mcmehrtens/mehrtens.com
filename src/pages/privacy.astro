@@ -57,45 +57,42 @@ const og = {
     <header>
       <Title />
       <p>
-        Published: <time datetime={firstPublished}
-          >{
-            new Date(firstPublished).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }</time
-        >
+        Published:{" "}
+        <time datetime={firstPublished}>
+          {new Date(firstPublished).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          })}
+        </time>
       </p>
       <p>
-        Last updated: <time datetime={latest.date}
-          >{
-            new Date(latest.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }</time
-        >
+        Last updated:{" "}
+        <time datetime={latest.date}>
+          {new Date(latest.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          })}
+        </time>
       </p>
     </header>
     <p>
-      <b>Summary:</b> This is my personal website. I don’t use cookies, analytics,
-      tracking scripts, or advertising, and I don’t collect, sell, or share your personal
-      information. The only data collected while using this site is standard technical
-      information my hosting provider logs automatically to deliver and secure the
-      site.
+      <b>Summary:</b> This is my personal website. I don’t use cookies,
+      analytics, tracking scripts, or advertising, and I don’t collect, sell, or
+      share your personal information. The only data collected while using this
+      site is standard technical information my hosting provider logs
+      automatically to deliver and secure the site.
     </p>
 
     <h2>Who runs this site</h2>
     <p>
-      This website <a href="/">mehrtens.com</a> is operated by Matthew Mehrtens as
-      a personal, non-commercial project. If you have any questions about this policy,
-      you can reach me at <a href="mailto:privacy@mehrtens.com"
-        >privacy@mehrtens.com</a
-      >.
+      This website <a href="/">mehrtens.com</a> is operated by Matthew Mehrtens
+      as a personal, non-commercial project. If you have any questions about
+      this policy, you can reach me at{" "}
+      <a href="mailto:privacy@mehrtens.com">privacy@mehrtens.com</a>.
     </p>
 
     <h2>Information I collect directly</h2>
@@ -113,22 +110,26 @@ const og = {
       assets, and protect my site from abuse. This may include:
     </p>
     <ul>
-      <li>Internet Protocol (<abbr>IP</abbr>) addresses</li>
+      <li>
+        Internet Protocol (<abbr>IP</abbr>) addresses
+      </li>
       <li>Browser type and user-agent string</li>
       <li>
         The pages or files requested, and the date and time of the request
       </li>
       <li>
-        Approximate, country-level location derived from the <abbr>IP</abbr> address
+        Approximate, country-level location derived from the <abbr>IP</abbr>{" "}
+        address
       </li>
     </ul>
     <p>
-      This logging is done by Cloudflare as my hosting and <abbr>CDN</abbr> provider.
-      I do not add any tracking of my own and I only see aggregate traffic statistics
-      from Cloudflare’s built-in dashboard analytics, which is server-side and cookieless.
-      I do not use any of this information to identify you or to build a profile of
-      you. See the <a href="#third-party-services">Third-party services</a> section
-      for more information.
+      This logging is done by Cloudflare as my hosting and <abbr>CDN</abbr>{" "}
+      provider. I do not add any tracking of my own and I only see aggregate
+      traffic statistics from Cloudflare’s built-in dashboard analytics, which
+      is server-side and cookieless. I do not use any of this information to
+      identify you or to build a profile of you. See the{" "}
+      <a href="#third-party-services">Third-party services</a> section for more
+      information.
     </p>
 
     <h2>Cookies</h2>
@@ -146,12 +147,11 @@ const og = {
     <h2 id="third-party-services">Third-party services</h2>
     <p>
       The only third party involved in operating this site is my hosting and
-      content-delivery provider, <b>Cloudflare</b> (including Cloudflare’s static
-      hosting and object storage for assets). Cloudflare processes the technical request
-      data described above on my behalf as part of serving the site. You can read
-      how Cloudflare handles that data in its <a
-        href="https://www.cloudflare.com/privacypolicy/">privacy policy</a
-      >.
+      content-delivery provider, <b>Cloudflare</b> (including Cloudflare’s
+      static hosting and object storage for assets). Cloudflare processes the
+      technical request data described above on my behalf as part of serving the
+      site. You can read how Cloudflare handles that data in its{" "}
+      <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>.
     </p>
 
     <h2>If you email me</h2>
@@ -168,12 +168,11 @@ const og = {
       very little data for you to access, correct, or delete. Depending on where
       you live, you may have rights under privacy laws such as the General Data
       Protection Regulation (<abbr>GDPR</abbr>), the California Consumer Privacy
-      Act (<abbr>CCPA</abbr>), or the California Privacy Rights Act (<abbr
-        >CPRA</abbr
-      >). If you’d like to exercise any such right or simply ask what, if
-      anything, I hold, email me at <a href="mailto:privacy@mehrtens.com"
-        >privacy@mehrtens.com</a
-      > and I’ll help.
+      Act (<abbr>CCPA</abbr>), or the California Privacy Rights Act (
+      <abbr>CPRA</abbr>). If you’d like to exercise any such right or simply ask
+      what, if anything, I hold, email me at{" "}
+      <a href="mailto:privacy@mehrtens.com">privacy@mehrtens.com</a> and I’ll
+      help.
     </p>
 
     <h2>Children’s privacy</h2>
@@ -190,7 +189,7 @@ const og = {
       date above, and add to the running changelog below.
     </p>
     <table>
-      <caption> Changes that have been made to this privacy policy. </caption>
+      <caption>Changes that have been made to this privacy policy.</caption>
       <thead>
         <tr>
           <th scope="col">Date</th>
@@ -198,16 +197,14 @@ const og = {
         </tr>
       </thead>
       <tbody>
-        {
-          ordered.map((a) => (
-            <tr>
-              <td>
-                <time datetime={a.date}>{a.date}</time>
-              </td>
-              <td>{a.change}</td>
-            </tr>
-          ))
-        }
+        {ordered.map((a) => (
+          <tr>
+            <td>
+              <time datetime={a.date}>{a.date}</time>
+            </td>
+            <td>{a.change}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </article>
