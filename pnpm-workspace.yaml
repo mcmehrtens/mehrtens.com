@@ -3,9 +3,6 @@ allowBuilds:
   sharp: true
   workerd: true
 minimumReleaseAge: 10080
-minimumReleaseAgeExclude:
-  - astro
-  - "@astrojs/*"
 overrides:
   "basic-ftp@<6.2.4": ^6.2.4 # GHSA-5pm8-86m8-9m6r
   "glob@>=9.0.0 <14.0.2": ^14.0.2 # GHSA-3g3m-2fjr-6pw4
