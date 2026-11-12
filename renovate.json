@@ -9,10 +9,15 @@
   "constraints": {
     "pnpm": ">=11.9.0"
   },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["at any time"]
+  },
   "packageRules": [
     {
       "description": "Group all npm updates into one PR (mirrors Dependabot all-dependencies)",
       "matchManagers": ["npm"],
+      "matchUpdateTypes": ["!lockFileMaintenance"],
       "groupName": "npm dependencies"
     },
     {
