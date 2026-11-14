@@ -11,7 +11,8 @@
   },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["at any time"]
+    "schedule": ["at any time"],
+    "minimumReleaseAge": null
   },
   "packageRules": [
     {
