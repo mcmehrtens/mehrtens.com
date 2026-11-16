@@ -10,7 +10,7 @@ interface PrivacyPolicyChange {
 
 const privacyPolicyChanges: PrivacyPolicyChange[] = [
   {
-    date: "2026-07-02",
+    date: "2026-07-02T18:29:45-06:00",
     change: "First published",
   },
 ];
@@ -63,7 +63,7 @@ const og = {
             year: "numeric",
             month: "long",
             day: "numeric",
-            timeZone: "UTC",
+            timeZone: "America/Chicago",
           })}
         </time>
       </p>
@@ -74,7 +74,7 @@ const og = {
             year: "numeric",
             month: "long",
             day: "numeric",
-            timeZone: "UTC",
+            timeZone: "America/Chicago",
           })}
         </time>
       </p>
@@ -200,7 +200,7 @@ const og = {
         {ordered.map((a) => (
           <tr>
             <td>
-              <time datetime={a.date}>{a.date}</time>
+              <time datetime={a.date}>{a.date.slice(0, 10)}</time>
             </td>
             <td>{a.change}</td>
           </tr>
