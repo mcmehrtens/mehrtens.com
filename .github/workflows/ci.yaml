@@ -66,11 +66,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Detect runner OS release
+        id: os-release
+        run: . /etc/os-release && echo "id=$ID-$VERSION_ID" >> "$GITHUB_OUTPUT"
+
       - name: Cache Playwright browsers
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          key:
+            playwright-${{ runner.os }}-${{ steps.os-release.outputs.id }}-${{
+            hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium firefox webkit
