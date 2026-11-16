@@ -8,8 +8,8 @@ const pathname = Astro.url.pathname;
 
 const title = titleFor(pathname);
 
-const firstPublished = "2026-07-02";
-const lastUpdated = "2026-07-02";
+const firstPublished = "2026-07-02T18:28:42-06:00";
+const lastUpdated = "2026-11-12T18:21:18-06:00";
 
 const graph = [
   {
@@ -47,7 +47,7 @@ const og = {
             year: "numeric",
             month: "long",
             day: "numeric",
-            timeZone: "UTC",
+            timeZone: "America/Chicago",
           })}
         </time>
       </p>
@@ -58,7 +58,7 @@ const og = {
             year: "numeric",
             month: "long",
             day: "numeric",
-            timeZone: "UTC",
+            timeZone: "America/Chicago",
           })}
         </time>
       </p>
