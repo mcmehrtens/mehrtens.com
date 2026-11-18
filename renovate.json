@@ -27,9 +27,9 @@
       "groupName": "github actions"
     },
     {
-      "description": "Astro is upgraded manually via @astrojs/upgrade; tracked by the astro-update workflow",
+      "description": "Group Astro into its own PR so an Astro major doesn't block other npm updates",
       "matchPackageNames": ["astro", "@astrojs/**"],
-      "enabled": false
+      "groupName": "astro"
     },
     {
       "description": "Hand-pinned CVE-remediation floors; do not update",

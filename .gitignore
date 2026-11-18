@@ -30,7 +30,5 @@ lighthouse-reports/
 lighthouse-summary.md
 lighthouse-badges.json
 lighthouse-regression.txt
-astro-update.md
-astro-update-flag.txt
 lychee/
 .lycheecache
