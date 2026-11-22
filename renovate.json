@@ -2,16 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "timezone": "America/Chicago",
+  "schedule": ["* * * * 6"],
   "minimumReleaseAge": "7 days",
   "internalChecksFilter": "strict",
   "separateMajorMinor": false,
-  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
   "constraints": {
     "pnpm": ">=11.9.0"
   },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["at any time"],
+    "schedule": ["* * * * 6"],
     "minimumReleaseAge": null
   },
   "packageRules": [
